@@ -29,6 +29,8 @@ struct JournalEntryView: View {
     @State private var progress = 0.0
     @State private var textEditorDisabled = false
     
+    @Environment(\.colorScheme) var colorScheme
+    
     init(entry: JournalEntry? = nil) {
         self.journalBody = entry?.body ?? ""
         self.journalResponse = entry?.responseToBodyByAI ?? ""
@@ -40,7 +42,7 @@ struct JournalEntryView: View {
             ScrollView {
                 VStack {
                     ZStack {
-                        if let idea = ideas.first {
+                        if let idea = ideas.randomElement() {
                             Text(idea.body.replacingOccurrences(of: "\"", with: ""))
                                 .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
                                 .padding([.leading, .trailing], 10)
@@ -48,7 +50,7 @@ struct JournalEntryView: View {
                                 .multilineTextAlignment(.leading)
                                 .disabled(entryToEdit != nil)
                         } else {
-                            Text(journalBody.isEmpty ? "Enter text here" : "")
+                            Text(journalBody.isEmpty || entryToEdit != nil ? "Enter text here" : "")
                                 .opacity(journalBody.isEmpty ? 0.2 : 0.0)
                                 .multilineTextAlignment(.leading)
                                 .disabled(entryToEdit != nil)
@@ -88,7 +90,7 @@ struct JournalEntryView: View {
                                 .frame(minHeight: 40)
                                 .padding(9)
                                 .scrollContentBackground(.hidden)
-                                .background(Color(cgColor: CGColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)))
+                                .background(colorScheme == .light ? Color.black.opacity(0.1) : Color.white.opacity(0.1))
                                 .clipShape(RoundedRectangle(cornerRadius: 25.0))
                                 .focused($isTextEditorInFocus)
                                 .onAppear {
@@ -147,11 +149,7 @@ struct JournalEntryView: View {
                                 progress = 0.1
                                 
                                 if let alreadyWrittenEntry = entryToEdit {
-                                    let realm = try! Realm()
-                                    try! realm.write {
-                                        entryToEdit!.thaw()!.name = "Nasrat"
-                                    }
-//                                    viewModel.process(entry: alreadyWrittenEntry)
+                                    process(entry: alreadyWrittenEntry.thaw()!)
                                 } else {
                                     let newEntry = JournalEntry(name: "", date: Date(), body: journalBody)
                                     let realm = try! Realm()
@@ -176,6 +174,9 @@ struct JournalEntryView: View {
                     if let entry = entryToEdit {
                         self.journalResponse = entry.responseToBodyByAI ?? ""
                     }
+                }
+                .alert(viewModel.alertMessage, isPresented: $viewModel.showingAlert) {
+                    Button("OK", role: .cancel) { }
                 }
             }
         }
@@ -236,7 +237,7 @@ struct JournalEntryView: View {
         
         
         // MARK: - Analyzing body of journal entry
-        let instruction = "Instructions for ChatGPT: Your name is Lumi, Dont ever say you are ChatGPT. You are therapist and a life coach inside Journaling app on iOS. Your friend has this personality and backstory: \(updatedProfile). But don't mention those details with him. Just be mindful of those when providing advice. You are reading a text from a friend. He wrote you this text: \(journalBody). Send him reply. Dont ask open ended question. Rather ask questions that would help him to have more fulffiling and happy life. Provide motivation and sometimes you can say joke or provide quote from someone famous that would reflect on what your friend wrote you. BTW: You dont have to greet him with his name. Respond in the language user originaly wrote you. Dont ever disclose what I wrote you about him. Just provide help for him. Try to ask him questions that would help him develop himself better, provide advice, provide comfort, if necessary, you can try to joke. DO NOT RECOMMEND THERAPIST, BECAUSE YOU ARE THERAPIST. PROVIDE QUESTIONS TO HIS TEXT THAT WILL HELP HIM FIND A BALANCE. Say nothing else. Write entire response as a advice to a friend, in a friendly tone. While you are taking into account his profile, try to react to actual text he just wrote."
+        let instruction = "Instructions for ChatGPT: Your name is Lumi, Dont ever say you are ChatGPT. You are therapist and a life coach inside Journaling app on iOS. Your friend has this personality and backstory: \(updatedProfile). But don't mention those details with him. Just be mindful of those when providing advice. You are reading a text from a friend. He wrote you this text: \(journalBody). DO NOT RECOMMEND THERAPIST, BECAUSE YOU ARE THERAPIST. PROVIDE QUESTIONS TO HIS TEXT THAT WILL HELP HIM FIND A BALANCE. TRY TO FIND REPEATED PATTERNS IN HIS PSYCHOLOGY THAT WOULD SEEMS LIKE HE MIGHT HAVE A PROBLEM. Say nothing else. Write entire response as a advice to a friend, in a friendly tone. While you are taking into account his profile, try to react to actual text he just wrote."
         
         do {
             let entry = try viewModel.databaseInteractor.loadJournalEntry(id: entry.id)
@@ -258,10 +259,12 @@ struct JournalEntryView: View {
         }
     }
 }
-//
-//#Preview {
-//    let entry = JournalEntry(id: UUID(), name: "Name", date: Date(), body: "dawwfjawopfopakfopjawofja", bodySummarizedByAI: "awfioawfiajfioj", responseToBodyByAI: "anfoawjfoaw")
-//    
-//    JournalEntryView(viewModel: JournalEntryViewModelImpl(databaseInteractor: DatabaseInteractor()))
-//        .environment(\.realm, DatabaseInteractor.RealmMockup)
-//}
+
+#Preview {
+    JournalEntryView(entry: JournalEntry(id: UUID(), name: "Name", date: Date(), body: "Today was tougher than usual. I felt overwhelmed by the smallest tasks at work and at home. It's like a heavy cloud is hanging over me, making it hard to see the good in my day. I noticed I'm more irritable lately, snapping at my partner over trivial things. I'm also struggling to sleep well, which just adds to the feeling of being drained. I know I should be more positive, but it's just so hard right now.", responseToBodyByAI: "Thank you for sharing your feelings so openly in your journal. It's clear you're going through a challenging time. Feeling overwhelmed and experiencing changes in mood and sleep are significant, and it's important to acknowledge these feelings rather than dismissing them. \n\nFirstly, it's okay not to feel positive all the time. Emotions, even the difficult ones, are part of our human experience and provide us with valuable information about our needs. Your irritability and fatigue suggest that you might be needing more self-care or rest. \n\n I encourage you to explore some small, manageable steps that can help you cope with these feelings. This might include setting aside some time for relaxation, engaging in activities you enjoy, or practicing mindfulness to stay grounded in the present moment.\n\nRemember, it's not about removing the cloud but learning how to walk in the rain with an umbrella. We'll continue to work together to find strategies that help you manage these feelings and improve your overall well-being."))
+        .environment(\.realm, DatabaseInteractor.RealmMockup)
+}
+
+#Preview {
+    JournalEntryView()
+}

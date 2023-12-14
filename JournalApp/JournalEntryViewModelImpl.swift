@@ -12,6 +12,9 @@ import RealmSwift
 
 @MainActor final class JournalEntryViewModelImpl: JournalViewModel {
     
+    @Published var showingAlert = false
+    @Published var alertMessage = ""
+    
     public let databaseInteractor: DatabaseInteractor
     public let entry: JournalEntry?
     
@@ -47,15 +50,23 @@ import RealmSwift
         let chat = Chat(role: .assistant, content: instruction, name: "Lumi")
         let chatQuery = ChatQuery(model: .gpt3_5Turbo_16k_0613, messages: [chat])
         
-        client?.chats(query: chatQuery, completion: { result in
+        client?.chats(query: chatQuery, completion: { [weak self] result in
             switch result {
             case .success(let results):
                 let output = results.choices.first?.message.content ?? ""
                 completion(output.cleaned().replacingSmileysWithEmojis().cleanString())
             case .failure(let error):
                 print(error.localizedDescription)
+                self?.invokeNetworkProblemAlert()
             }
         })
+    }
+    
+    func invokeNetworkProblemAlert() {
+        DispatchQueue.main.async { [weak self] in
+            self?.alertMessage = "Network connection problem"
+            self?.showingAlert = true
+        }
     }
     
     func deleteAllTextIdeasExceptMostRecentThree() {
@@ -64,8 +75,8 @@ import RealmSwift
         try! realm.write {
             let allTextIdeas = realm.objects(TextIdea.self).sorted(byKeyPath: "date", ascending: false)
 
-            if allTextIdeas.count > 3 {
-                let textIdeasToDelete = allTextIdeas.dropFirst(3)
+            if allTextIdeas.count > 5 {
+                let textIdeasToDelete = allTextIdeas.dropFirst(5)
 
                 realm.delete(Array(textIdeasToDelete))
             }

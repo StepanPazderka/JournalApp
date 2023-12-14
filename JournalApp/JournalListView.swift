@@ -10,9 +10,13 @@ import RealmSwift
 
 struct JournalListView: View {
     @ObservedResults(JournalEntry.self, sortDescriptor: SortDescriptor(keyPath: "date", ascending: false)) var journalEntries
-        
+    
     @State private var selectedEntry: JournalEntry?
     @State private var showingAddNewJournalEntry = false
+    
+    @State var showingRenameDialog = false
+    @State var newName = ""
+    @State var selectedId: JournalEntry?
     
     var body: some View {
         NavigationSplitView {
@@ -33,6 +37,14 @@ struct JournalListView: View {
                                 .opacity(0.5)
                         }
                         .padding(.horizontal, 15)
+                        .contextMenu {
+                            Button {
+                                selectedId = entry
+                                showingRenameDialog = true
+                            } label: {
+                                Label("Rename", systemImage: "pencil")
+                            }
+                        }
                     }
                 }
                 .onDelete(perform: { indexSet in
@@ -55,9 +67,18 @@ struct JournalListView: View {
             .sheet(isPresented: $showingAddNewJournalEntry, content: {
                 let viewModel = JournalEntryViewModelImpl()
                 let entry = JournalEntry(id: UUID(), name: "", date: Date(), body: "")
-
+                
                 JournalEntryView()
             })
+            .alert("Rename album", isPresented: $showingRenameDialog) {
+                TextField("Enter album name", text: $newName)
+                Button("OK", role: .cancel) {
+                    let realm = try! Realm()
+                    try? realm.write {
+                        selectedEntry?.thaw()?.name = newName
+                    }
+                }
+            }
         } detail: {
             Text("Select journal entry or create a new one")
             Button {
