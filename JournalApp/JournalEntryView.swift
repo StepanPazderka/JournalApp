@@ -30,7 +30,7 @@ struct JournalEntryView: View {
     @State private var textEditorDisabled = false
     
     @Environment(\.colorScheme) var colorScheme
-    
+        
     init(entry: JournalEntry? = nil) {
         self.journalBody = entry?.body ?? ""
         self.journalResponse = entry?.responseToBodyByAI ?? ""
@@ -42,18 +42,21 @@ struct JournalEntryView: View {
             ScrollView {
                 VStack {
                     ZStack {
-                        if let idea = ideas.randomElement() {
-                            Text(idea.body.replacingOccurrences(of: "\"", with: ""))
-                                .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
-                                .padding([.leading, .trailing], 10)
-                                .padding([.top, .bottom], 17)
-                                .multilineTextAlignment(.leading)
-                                .disabled(entryToEdit != nil)
-                        } else {
-                            Text(journalBody.isEmpty || entryToEdit != nil ? "Enter text here" : "")
-                                .opacity(journalBody.isEmpty ? 0.2 : 0.0)
-                                .multilineTextAlignment(.leading)
-                                .disabled(entryToEdit != nil)
+                        if entryToEdit == nil || journalBody.isEmpty {
+                            if let idea = ideas.randomElement() {
+                                if journalBody.isEmpty {
+                                    Text(idea.body.replacingOccurrences(of: "\"", with: ""))
+                                        .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
+                                        .padding(17)
+                                        .multilineTextAlignment(.leading)
+                                        .disabled(entryToEdit != nil)
+                                }
+                            } else {
+                                Text(journalBody.isEmpty || entryToEdit != nil ? "Enter text here" : "")
+                                    .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
+                                    .multilineTextAlignment(.leading)
+                                    .disabled(!journalBody.isEmpty)
+                            }
                         }
                         if let entryToEdit {
                             ZStack {
@@ -64,11 +67,11 @@ struct JournalEntryView: View {
                                             UIPasteboard.general.string = entryToEdit.body
                                             withAnimation {
                                                 showNotificationOverBody = true
-                                                DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
+                                                DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                                                     withAnimation {
                                                         showNotificationOverBody = false
                                                     }
-                                                })
+                                                }
                                             }
                                         } label: {
                                             Label("Copy to clipboard", systemImage: "doc.on.doc")
@@ -101,7 +104,9 @@ struct JournalEntryView: View {
                                 .disabled(textEditorDisabled)
                         }
                         
-                        Text(journalBody).opacity(0).padding(.all, 8)
+                        Text(journalBody)
+                            .opacity(0)
+                            .padding(.all, 8)
                     }
                     
                     ZStack {
@@ -127,7 +132,7 @@ struct JournalEntryView: View {
                             }
                             .opacity(!journalResponse.isEmpty ? 1 : 0)
                             .transition(.opacity) // Apply the dissolve effect
-                            .animation(journalResponse.isEmpty ? nil : .easeIn(duration: 1.0), value: journalResponse)
+                            .animation(journalResponse.isEmpty ? nil : .easeIn(duration: 1.0), value: entryToEdit == nil)
                             .lineLimit(nil)
                         if showNotificationOverResponse {
                             Text("Copied into clipboard")
@@ -174,6 +179,10 @@ struct JournalEntryView: View {
                     if let entry = entryToEdit {
                         self.journalResponse = entry.responseToBodyByAI ?? ""
                     }
+                    
+                    viewModel.$showingAlert.sink { value in
+                        self.progress = 0.0
+                    }.store(in: &cancellables)
                 }
                 .alert(viewModel.alertMessage, isPresented: $viewModel.showingAlert) {
                     Button("OK", role: .cancel) { }
@@ -181,6 +190,9 @@ struct JournalEntryView: View {
             }
         }
     }
+    
+    @State private var cancellables = Set<AnyCancellable>()
+
     
     func process(entry: JournalEntry) {
         // MARK: - Analyzing title
@@ -217,7 +229,7 @@ struct JournalEntryView: View {
         
         var updatedProfile = profile
         if let profileInstruction {
-            viewModel.getAIoutput(instruction: profileInstruction, model: .gpt4_32k) { newProfile in
+            viewModel.getAIoutput(instruction: profileInstruction, model: .gpt4) { newProfile in
                 DatabaseInteractor().updateProfile(updatedProfile: newProfile)
                 updatedProfile = newProfile
             }
@@ -225,7 +237,7 @@ struct JournalEntryView: View {
         
         // MARK: - Generating new idea
         let newTextIdeaInstruction = "Based on new updated profile about your patient, generate a new short text prompt for new journal entry that will help him and you understand user better. Try to by nice and friendly, try to suggest something that would help him to live a better life or help you understand him better. Instructions that needs to be obeyed by ChatGPT: By short! Only respond with text prompt itself, no other text! Be friendly! Try to be motivational and optimistic!"
-            viewModel.getAIoutput(instruction: newTextIdeaInstruction, model: .gpt4_32k) { newIdeaText in
+            viewModel.getAIoutput(instruction: newTextIdeaInstruction, model: .gpt4) { newIdeaText in
             DispatchQueue.main.async {
                 let realm = try! Realm()
                 try! realm.write {
@@ -242,7 +254,7 @@ struct JournalEntryView: View {
         do {
             let entry = try viewModel.databaseInteractor.loadJournalEntry(id: entry.id)
             
-            viewModel.getAIoutput(instruction: instruction, model: .gpt4_32k) { response in
+            viewModel.getAIoutput(instruction: instruction, model: .gpt4) { response in
                 DispatchQueue.main.async {
                     journalResponse = response
                     

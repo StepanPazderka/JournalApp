@@ -65,9 +65,6 @@ struct JournalListView: View {
                 }
             }
             .sheet(isPresented: $showingAddNewJournalEntry, content: {
-                let viewModel = JournalEntryViewModelImpl()
-                let entry = JournalEntry(id: UUID(), name: "", date: Date(), body: "")
-                
                 JournalEntryView()
             })
             .alert("Rename album", isPresented: $showingRenameDialog) {

@@ -9,8 +9,11 @@ import Foundation
 import OpenAI
 import Combine
 import RealmSwift
+import SwiftUI
 
 @MainActor final class JournalEntryViewModelImpl: JournalViewModel {
+    
+    var networkInteractor: any NetworkInteractor = NetworkInteractorImpl.shared
     
     @Published var showingAlert = false
     @Published var alertMessage = ""
@@ -48,7 +51,7 @@ import RealmSwift
     // MARK: - Function for calling API service
     func getAIoutput(instruction: String, model: Model, completion: @escaping (String) -> Void) {
         let chat = Chat(role: .assistant, content: instruction, name: "Lumi")
-        let chatQuery = ChatQuery(model: .gpt3_5Turbo_16k_0613, messages: [chat])
+        let chatQuery = ChatQuery(model: model, messages: [chat])
         
         client?.chats(query: chatQuery, completion: { [weak self] result in
             switch result {
@@ -57,14 +60,14 @@ import RealmSwift
                 completion(output.cleaned().replacingSmileysWithEmojis().cleanString())
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.invokeNetworkProblemAlert()
+                self?.invokeNetworkProblemAlert(error: error)
             }
         })
     }
     
-    func invokeNetworkProblemAlert() {
+    func invokeNetworkProblemAlert(error: Error) {
         DispatchQueue.main.async { [weak self] in
-            self?.alertMessage = "Network connection problem"
+            self?.alertMessage = "Error: \(error.localizedDescription)"
             self?.showingAlert = true
         }
     }

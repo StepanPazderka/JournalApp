@@ -34,8 +34,6 @@ final class JournalEntry: Object, ObjectKeyIdentifiable, Identifiable {
         self.bodySummarizedByAI = bodySummarizedByAI
         self.responseToBodyByAI = responseToBodyByAI
     }
-    
-//    static let mock = Self(id: UUID(), name: "Name", date: Date(), body: "Body")
 }
 
 final class TextIdea: Object, ObjectKeyIdentifiable {
