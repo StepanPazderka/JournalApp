@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftData
 
 enum DatabaseInteractorError: Error {
     case cantLoadObjects
@@ -14,7 +15,10 @@ enum DatabaseInteractorError: Error {
     case cantFindRealm
 }
 
-class DatabaseInteractor {
+@ModelActor
+actor DatabaseInteractor {
+    let networkInteractor: any NetworkInteractor = NetworkInteractorImpl()
+    
     static private let realmConfig = Realm.Configuration(schemaVersion: 5)
     static public let productionRealm: Realm = try! Realm(configuration: realmConfig)
     static public var RealmMockup: Realm {
@@ -67,7 +71,7 @@ In therapy, John Smith, a 30-year-old graphic designer, is addressing his chroni
         throw DatabaseInteractorError.unknown
     }
     
-    func updateProfile(updatedProfile: String) {
+    nonisolated func updateProfile(updatedProfile: String) {
         DispatchQueue.main.async {
             let realm = try? Realm()
             
@@ -85,6 +89,70 @@ In therapy, John Smith, a 30-year-old graphic designer, is addressing his chroni
                     }
                 }
             }
+        }
+    }
+    
+    func processEntry(entry: JournalEntrySwiftData) async {
+        let profile = self.loadUserProfile()
+        var profileInstruction: String?
+        
+        // MARK: - Analyzing profile
+        if let body = entry.body {
+            if profile.isEmpty {
+                profileInstruction = "Your name is Lumi, you are a therapist Journal app running on iOS. Take this user written text \(body) and respond back only a profile about what you learned about a person who wrote thise, try to understand issues and problems, pick out characeteristics of long term well being of patient, try to understand personality of user and what to focus on next in order to help him or her live a better life. Dont ever talk about his name or age. Write it like you writing this to the patient, treat him like a friend"
+            } else {
+                profileInstruction = "Your name is Lumi, you are a therapist Journal app running on iOS. Take this user profile: \(profile) and take this user written text \(body) and respond back only new updated profile where you combine these two, pick out characeteristics of long term well being of patient, try to understand issues and problems, try to understand personality of user and what to focus on next. Dont ever talk about his name or age. Write it like you writing this to the patient, treat him like a friend"
+            }
+        }
+        
+        var updatedProfile = profile
+        if let profileInstruction {
+            let result = await networkInteractor.getAIoutput(instruction: profileInstruction, model: .gpt3_5Turbo_16k)
+            switch result {
+            case .success(let output):
+                self.updateProfile(updatedProfile: output)
+                updatedProfile = output
+            case .failure(_):
+                break
+            }
+        }
+        
+        // MARK: - Generating new idea
+        let newTextIdeaInstruction = "Based on new updated profile about your patient, generate a new short text prompt for new journal entry that will help him and you understand user better. Try to by nice and friendly, try to suggest something that would help him to live a better life or help you understand him better. Instructions that needs to be obeyed by ChatGPT: By short! Only respond with text prompt itself, no other text! Be friendly! Try to be motivational and optimistic!"
+        
+        let newTextIdeaResult = await networkInteractor.getAIoutput(instruction: newTextIdeaInstruction, model: .gpt3_5Turbo_16k)
+        switch newTextIdeaResult {
+        case .success(let output):
+            self.updateProfile(updatedProfile: output)
+            updatedProfile = output
+        case .failure(_):
+            break
+        }
+        
+        // MARK: - Analyzing body of journal entry
+        let bodyAnalysisInstruction = "Instructions for ChatGPT: Your name is Lumi, Dont ever say you are ChatGPT. You are therapist and a life coach inside Journaling app on iOS. Your friend has this personality and backstory: \(updatedProfile). But don't mention those details with him. Just be mindful of those when providing advice. You are reading a text from a friend. He wrote you this text: \(entry.body). DO NOT RECOMMEND THERAPIST, BECAUSE YOU ARE THERAPIST. PROVIDE QUESTIONS TO HIS TEXT THAT WILL HELP HIM FIND A BALANCE. TRY TO FIND REPEATED PATTERNS IN HIS PSYCHOLOGY THAT WOULD SEEMS LIKE HE MIGHT HAVE A PROBLEM. Say nothing else. Write entire response as a advice to a friend, in a friendly tone. While you are taking into account his profile, try to react to actual text he just wrote."
+        
+        let bodyAnalysisResult = await networkInteractor.getAIoutput(instruction: bodyAnalysisInstruction, model: .gpt3_5Turbo_16k)
+        switch bodyAnalysisResult {
+        case .success(let output):
+            entry.responseToBodyByAI = output
+            try? await self.modelContainer.mainContext.save()
+        case .failure(_):
+            break
+        }
+        
+        // MARK: - Analyzing title
+        guard let body = entry.body else { return }
+        
+        let TitleInstruction = "Create a title for this text: \(body) and ONLY send back a title, nothing else. Try to make that title about 10 words. Write it as one single sentence and dont be too romantic."
+        
+        let TitleInstructionResult = await networkInteractor.getAIoutput(instruction: TitleInstruction, model: .gpt3_5Turbo_16k)
+        switch TitleInstructionResult {
+        case .success(let output):
+            entry.name = output
+            try? await self.modelContainer.mainContext.save()
+        case .failure(_):
+            break
         }
     }
 }

@@ -13,5 +13,5 @@ protocol NetworkInteractor {
     
     static var shared: implementingClass { get }
     
-    func getAIoutput(instruction: String, model: Model, completion: @escaping (Result<String, Error>) -> Void)
+    func getAIoutput(instruction: String, model: Model) async -> Result<String, Error>
 }

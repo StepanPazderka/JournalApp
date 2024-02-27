@@ -7,30 +7,33 @@
 
 import SwiftUI
 import RealmSwift
+import SwiftData
 
 struct JournalListView: View {
-    @ObservedResults(JournalEntry.self, sortDescriptor: SortDescriptor(keyPath: "date", ascending: false)) var journalEntries
+    @Query(sort: \JournalEntrySwiftData.date) var journalEntriesSwiftData: [JournalEntrySwiftData]
     
-    @State private var selectedEntry: JournalEntry?
+    @State private var selectedEntry: JournalEntrySwiftData?
     @State private var showingAddNewJournalEntry = false
     
     @State var showingRenameDialog = false
     @State var newName = ""
-    @State var selectedId: JournalEntry?
+    @State var selectedId: JournalEntrySwiftData?
+    
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedEntry) {
-                ForEach(journalEntries) { (entry: JournalEntry) in
+                ForEach(journalEntriesSwiftData) { (entry: JournalEntrySwiftData) in
                     NavigationLink {
                         JournalEntryView(entry: entry)
                     } label: {
                         VStack(alignment: .leading) {
-                            Text(entry.name.transformToSentenceCase())
+                            Text(entry.name?.transformToSentenceCase() ?? entry.body!.truncated(to: 25))
                                 .font(.headline)
                                 .multilineTextAlignment(.leading)
                                 .frame(height: 50)
-                            Text(format(Date: entry.date))
+                            Text(format(Date: entry.date ?? .now))
                                 .font(.system(size: 10))
                                 .multilineTextAlignment(.leading)
                                 .padding(.bottom, 0.0)
@@ -40,6 +43,10 @@ struct JournalListView: View {
                         .contextMenu {
                             Button {
                                 selectedId = entry
+//                                selectedEntry = entry
+                                if let selectedId {
+                                    newName = selectedId.name ?? ""
+                                }
                                 showingRenameDialog = true
                             } label: {
                                 Label("Rename", systemImage: "pencil")
@@ -49,8 +56,8 @@ struct JournalListView: View {
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet {
-                        let item = journalEntries[index]
-                        $journalEntries.remove(item)
+                        let item = journalEntriesSwiftData[index]
+                        context.delete(item)
                     }
                 })
             }
@@ -67,12 +74,12 @@ struct JournalListView: View {
             .sheet(isPresented: $showingAddNewJournalEntry, content: {
                 JournalEntryView()
             })
-            .alert("Rename album", isPresented: $showingRenameDialog) {
-                TextField("Enter album name", text: $newName)
+            .alert("Rename entry", isPresented: $showingRenameDialog) {
+                TextField("Enter entry name", text: $newName)
                 Button("OK", role: .cancel) {
-                    let realm = try! Realm()
-                    try? realm.write {
-                        selectedEntry?.thaw()?.name = newName
+                    if let selectedEntry = selectedId {
+                        selectedEntry.name = newName
+                        context.insert(selectedEntry)
                     }
                 }
             }

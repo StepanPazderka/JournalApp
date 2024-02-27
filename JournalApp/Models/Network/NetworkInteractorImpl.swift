@@ -18,19 +18,17 @@ final class NetworkInteractorImpl: NetworkInteractor {
         client = OpenAI(configuration: OpenAI.Configuration(token: apiKey))
     }
     
-    func getAIoutput(instruction: String, model: Model, completion: @escaping (Result<String, Error>) -> Void) {
+    func getAIoutput(instruction: String, model: Model) async -> Result<String, Error> {
         let chat = Chat(role: .assistant, content: instruction, name: "Lumi")
-        let chatQuery = ChatQuery(model: .gpt3_5Turbo_16k_0613, messages: [chat])
-        
-        client?.chats(query: chatQuery, completion: { result in
-            switch result {
-            case .success(let results):
-                let output = results.choices.first?.message.content ?? ""
-                completion(.success(output.cleaned().replacingSmileysWithEmojis().cleanString()))
-            case .failure(let error):
-                print(error.localizedDescription)
-                completion(.failure(error))
-            }
-        })
+        let chatQuery = ChatQuery(model: model, messages: [chat])
+
+        do {
+            let results = try await client?.chats(query: chatQuery)
+            let output = results?.choices.first?.message.content ?? ""
+            return .success(output.cleaned().replacingSmileysWithEmojis().cleanString())
+        } catch {
+            print(error.localizedDescription)
+            return .failure(error)
+        }
     }
 }

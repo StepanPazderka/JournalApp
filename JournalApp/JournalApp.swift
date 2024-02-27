@@ -7,9 +7,18 @@
 
 import SwiftUI
 import RealmSwift
+import SwiftData
 
 @main
-struct JournalApp: SwiftUI.App {
+struct JournalApp: SwiftUI.App {    
+    let container: ModelContainer = {
+        let storeURL = URL.documentsDirectory.appending(path: "database.sqlite")
+        print("Store URL: \(storeURL)")
+        let schema = Schema([JournalEntrySwiftData.self])
+        let configuration = ModelConfiguration(schema: schema, url: storeURL)
+        let container = try! ModelContainer(for: schema, configurations: configuration)
+        return container
+    }()
     
     var body: some Scene {
         WindowGroup {
@@ -27,5 +36,6 @@ struct JournalApp: SwiftUI.App {
                     .tabItem { Label("Profile", systemImage: "person.fill") }
             }
         }
+        .modelContainer(container)
     }
 }

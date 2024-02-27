@@ -11,34 +11,26 @@ import Combine
 import RealmSwift
 import SwiftUI
 
-@MainActor final class JournalEntryViewModelImpl: JournalViewModel {
-    
-    var networkInteractor: any NetworkInteractor = NetworkInteractorImpl.shared
+import SwiftData
+
+final class JournalEntryViewModelImpl: JournalViewModel {
+    private var networkInteractor: any NetworkInteractor = NetworkInteractorImpl.shared
     
     @Published var showingAlert = false
     @Published var alertMessage = ""
     
-    public let databaseInteractor: DatabaseInteractor
+    public var context: ModelContext!
+    private var databaseInteractor: DatabaseInteractor!
     public let entry: JournalEntry?
     
     init() {
-        self.databaseInteractor = DatabaseInteractor()
         self.entry = nil
-        setup()
     }
     
     init(entry: JournalEntry) {
-        self.databaseInteractor = DatabaseInteractor()
         self.entry = entry
-        setup()
     }
-        
-    private var client: OpenAI?
-    
-    func setup() {
-        client = OpenAI(configuration: OpenAI.Configuration(token: "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"))
-    }
-    
+            
     func updateJournalEntry(entry: JournalEntry) {
         DispatchQueue.main.async {
             let realm = try? Realm()
@@ -46,23 +38,6 @@ import SwiftUI
                 realm?.add(entry, update: .modified)
             }
         }
-    }
-    
-    // MARK: - Function for calling API service
-    func getAIoutput(instruction: String, model: Model, completion: @escaping (String) -> Void) {
-        let chat = Chat(role: .assistant, content: instruction, name: "Lumi")
-        let chatQuery = ChatQuery(model: model, messages: [chat])
-        
-        client?.chats(query: chatQuery, completion: { [weak self] result in
-            switch result {
-            case .success(let results):
-                let output = results.choices.first?.message.content ?? ""
-                completion(output.cleaned().replacingSmileysWithEmojis().cleanString())
-            case .failure(let error):
-                print(error.localizedDescription)
-                self?.invokeNetworkProblemAlert(error: error)
-            }
-        })
     }
     
     func invokeNetworkProblemAlert(error: Error) {
@@ -84,5 +59,14 @@ import SwiftUI
                 realm.delete(Array(textIdeasToDelete))
             }
         }
+    }
+    
+    func process(entry: JournalEntrySwiftData) async {
+        await databaseInteractor.processEntry(entry: entry)
+    }
+    
+    func setup(context: ModelContext) {
+        self.context = context
+        self.databaseInteractor = DatabaseInteractor(modelContainer: context.container)
     }
 }
