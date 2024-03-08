@@ -21,23 +21,14 @@ final class JournalEntryViewModelImpl: JournalViewModel {
     
     public var context: ModelContext!
     private var databaseInteractor: DatabaseInteractor!
-    public let entry: JournalEntry?
+    public let entry: JournalEntrySwiftData?
     
     init() {
         self.entry = nil
     }
     
-    init(entry: JournalEntry) {
+    init(entry: JournalEntrySwiftData) {
         self.entry = entry
-    }
-            
-    func updateJournalEntry(entry: JournalEntry) {
-        DispatchQueue.main.async {
-            let realm = try? Realm()
-            try! realm?.write {
-                realm?.add(entry, update: .modified)
-            }
-        }
     }
     
     func invokeNetworkProblemAlert(error: Error) {
@@ -47,22 +38,8 @@ final class JournalEntryViewModelImpl: JournalViewModel {
         }
     }
     
-    func deleteAllTextIdeasExceptMostRecentThree() {
-        let realm = try! Realm()
-
-        try! realm.write {
-            let allTextIdeas = realm.objects(TextIdea.self).sorted(byKeyPath: "date", ascending: false)
-
-            if allTextIdeas.count > 5 {
-                let textIdeasToDelete = allTextIdeas.dropFirst(5)
-
-                realm.delete(Array(textIdeasToDelete))
-            }
-        }
-    }
-    
-    func process(entry: JournalEntrySwiftData) async {
-        await databaseInteractor.processEntry(entry: entry)
+    func process(entry: JournalEntrySwiftData) async -> JournalEntrySwiftData {
+        return await databaseInteractor.processEntry(entry: entry)
     }
     
     func setup(context: ModelContext) {

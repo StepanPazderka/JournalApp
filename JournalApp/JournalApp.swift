@@ -14,7 +14,7 @@ struct JournalApp: SwiftUI.App {
     let container: ModelContainer = {
         let storeURL = URL.documentsDirectory.appending(path: "database.sqlite")
         print("Store URL: \(storeURL)")
-        let schema = Schema([JournalEntrySwiftData.self])
+        let schema = Schema([JournalEntrySwiftData.self, ProfileSwiftData.self, TextIdeaSwiftData.self])
         let configuration = ModelConfiguration(schema: schema, url: storeURL)
         let container = try! ModelContainer(for: schema, configurations: configuration)
         return container
@@ -24,7 +24,6 @@ struct JournalApp: SwiftUI.App {
         WindowGroup {
             TabView {
                 JournalListView()
-                    .environment(\.realm, DatabaseInteractor.productionRealm)
                     .tabItem { Label("Journal", systemImage: "list.dash") }
                     .overlay(alignment: .top) {
                         Color.clear // Or any view or color

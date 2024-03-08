@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */; };
+		7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
+		7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
+		7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
+		7F2C2F1B2B975BD100F9D020 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
+		7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
+		7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44EDE62B1FC60600A50C58 /* ProfileView.swift */; };
 		7F4D08492B87894200F4F47F /* Truncated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D08482B87894200F4F47F /* Truncated.swift */; };
 		7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */; };
@@ -19,7 +26,6 @@
 		7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB332B1A04500016E8A7 /* JournalListView.swift */; };
 		7F69EB372B1A08F60016E8A7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB362B1A08F60016E8A7 /* Realm */; };
 		7F69EB392B1A08F60016E8A7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB382B1A08F60016E8A7 /* RealmSwift */; };
-		7F69EB3C2B1A09910016E8A7 /* DatabaseObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3B2B1A09910016E8A7 /* DatabaseObjects.swift */; };
 		7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
 		7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
@@ -27,15 +33,29 @@
 		7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
 		7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
 		7FD19FCA2B1DB51800D97901 /* View+hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD19FC92B1DB51800D97901 /* View+hidden.swift */; };
+		7FDF1A522B9639F900B0D991 /* NetworkInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */; };
+		7FDF1A542B966D0E00B0D991 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
 		7FF316842B19343B008BA33B /* JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316832B19343B008BA33B /* JournalApp.swift */; };
 		7FF316862B19343B008BA33B /* JournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316852B19343B008BA33B /* JournalEntryView.swift */; };
 		7FF316882B19343C008BA33B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF316872B19343C008BA33B /* Assets.xcassets */; };
 		7FF3168B2B19343C008BA33B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF3168A2B19343C008BA33B /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7F2C2F132B9755AE00F9D020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7FF316782B19343B008BA33B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FF3167F2B19343B008BA33B;
+			remoteInfo = JournalApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		7F0A2CF32B306CF800FA692E /* JournalApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JournalApp.entitlements; sourceTree = "<group>"; };
 		7F0A2CF42B3079ED00FA692E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTests.swift; sourceTree = "<group>"; };
 		7F44EDE62B1FC60600A50C58 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7F4D08482B87894200F4F47F /* Truncated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truncated.swift; sourceTree = "<group>"; };
 		7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+existingModel.swift"; sourceTree = "<group>"; };
@@ -52,6 +72,8 @@
 		7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+transformToSentence.swift"; sourceTree = "<group>"; };
 		7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectsCloudKit.swift; sourceTree = "<group>"; };
 		7FD19FC92B1DB51800D97901 /* View+hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hidden.swift"; sourceTree = "<group>"; };
+		7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorMock.swift; sourceTree = "<group>"; };
+		7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractorMock.swift; sourceTree = "<group>"; };
 		7FF316802B19343B008BA33B /* JournalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF316832B19343B008BA33B /* JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalApp.swift; sourceTree = "<group>"; };
 		7FF316852B19343B008BA33B /* JournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryView.swift; sourceTree = "<group>"; };
@@ -60,6 +82,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7F2C2F0C2B9755AE00F9D020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FF3167D2B19343B008BA33B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F2C2F102B9755AE00F9D020 /* JournalAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */,
+			);
+			path = JournalAppTests;
+			sourceTree = "<group>";
+		};
 		7F69EB3A2B1A09030016E8A7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +138,7 @@
 				7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */,
 				7F69EB3B2B1A09910016E8A7 /* DatabaseObjects.swift */,
 				7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */,
+				7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -110,14 +148,26 @@
 			children = (
 				7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */,
 				7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */,
+				7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		7FDF1A502B95FD9A00B0D991 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F69EB332B1A04500016E8A7 /* JournalListView.swift */,
+				7FF316852B19343B008BA33B /* JournalEntryView.swift */,
+				7F44EDE62B1FC60600A50C58 /* ProfileView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7FF316772B19343B008BA33B = {
 			isa = PBXGroup;
 			children = (
 				7FF316822B19343B008BA33B /* JournalApp */,
+				7F2C2F102B9755AE00F9D020 /* JournalAppTests */,
 				7FF316812B19343B008BA33B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -126,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				7FF316802B19343B008BA33B /* JournalApp.app */,
+				7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,20 +184,18 @@
 		7FF316822B19343B008BA33B /* JournalApp */ = {
 			isa = PBXGroup;
 			children = (
+				7FDF1A502B95FD9A00B0D991 /* Views */,
 				7FF316832B19343B008BA33B /* JournalApp.swift */,
 				7F0A2CF42B3079ED00FA692E /* Info.plist */,
 				7F0A2CF32B306CF800FA692E /* JournalApp.entitlements */,
 				7F6EAE7F2B2A9C6800E97084 /* Models */,
 				7F69EB3A2B1A09030016E8A7 /* Utilities */,
-				7FF316852B19343B008BA33B /* JournalEntryView.swift */,
 				7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */,
 				7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */,
 				7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */,
 				7FF316872B19343C008BA33B /* Assets.xcassets */,
 				7FF316892B19343C008BA33B /* Preview Content */,
 				7F69EB312B1A04410016E8A7 /* JournalListViewModel.swift */,
-				7F69EB332B1A04500016E8A7 /* JournalListView.swift */,
-				7F44EDE62B1FC60600A50C58 /* ProfileView.swift */,
 			);
 			path = JournalApp;
 			sourceTree = "<group>";
@@ -162,6 +211,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7F2C2F0E2B9755AE00F9D020 /* JournalAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F2C2F172B9755AE00F9D020 /* Build configuration list for PBXNativeTarget "JournalAppTests" */;
+			buildPhases = (
+				7F2C2F0B2B9755AE00F9D020 /* Sources */,
+				7F2C2F0C2B9755AE00F9D020 /* Frameworks */,
+				7F2C2F0D2B9755AE00F9D020 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F2C2F142B9755AE00F9D020 /* PBXTargetDependency */,
+			);
+			name = JournalAppTests;
+			productName = JournalAppTests;
+			productReference = 7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7FF3167F2B19343B008BA33B /* JournalApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FF3168E2B19343C008BA33B /* Build configuration list for PBXNativeTarget "JournalApp" */;
@@ -192,9 +259,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					7F2C2F0E2B9755AE00F9D020 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 7FF3167F2B19343B008BA33B;
+					};
 					7FF3167F2B19343B008BA33B = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -219,11 +290,19 @@
 			projectRoot = "";
 			targets = (
 				7FF3167F2B19343B008BA33B /* JournalApp */,
+				7F2C2F0E2B9755AE00F9D020 /* JournalAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7F2C2F0D2B9755AE00F9D020 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FF3167E2B19343B008BA33B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,6 +315,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7F2C2F0B2B9755AE00F9D020 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F2C2F1B2B975BD100F9D020 /* NetworkInteractorImpl.swift in Sources */,
+				7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */,
+				7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */,
+				7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */,
+				7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */,
+				7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */,
+				7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FF3167C2B19343B008BA33B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,21 +342,68 @@
 				7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */,
 				7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */,
 				7F69EB272B1966BA0016E8A7 /* String+cleanedUp.swift in Sources */,
+				7FDF1A542B966D0E00B0D991 /* DatabaseInteractorMock.swift in Sources */,
 				7FD19FCA2B1DB51800D97901 /* View+hidden.swift in Sources */,
+				7FDF1A522B9639F900B0D991 /* NetworkInteractorMock.swift in Sources */,
 				7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */,
 				7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */,
 				7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */,
 				7FF316842B19343B008BA33B /* JournalApp.swift in Sources */,
 				7F69EB322B1A04410016E8A7 /* JournalListViewModel.swift in Sources */,
 				7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */,
-				7F69EB3C2B1A09910016E8A7 /* DatabaseObjects.swift in Sources */,
 				7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7F2C2F142B9755AE00F9D020 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FF3167F2B19343B008BA33B /* JournalApp */;
+			targetProxy = 7F2C2F132B9755AE00F9D020 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7F2C2F152B9755AE00F9D020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3HV23S92WL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JournalApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JournalApp";
+			};
+			name = Debug;
+		};
+		7F2C2F162B9755AE00F9D020 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3HV23S92WL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JournalApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JournalApp";
+			};
+			name = Release;
+		};
 		7FF3168C2B19343C008BA33B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -409,6 +549,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,6 +584,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,6 +596,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7F2C2F172B9755AE00F9D020 /* Build configuration list for PBXNativeTarget "JournalAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F2C2F152B9755AE00F9D020 /* Debug */,
+				7F2C2F162B9755AE00F9D020 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7FF3167B2B19343B008BA33B /* Build configuration list for PBXProject "JournalApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

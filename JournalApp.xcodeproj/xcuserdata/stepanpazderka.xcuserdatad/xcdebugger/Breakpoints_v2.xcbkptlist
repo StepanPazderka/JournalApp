@@ -52,5 +52,161 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "18D740BC-2B38-4602-9729-08F4F3F8AC6A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JournalApp/Models/Database/DatabaseInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "processEntry(entry:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "18D740BC-2B38-4602-9729-08F4F3F8AC6A - 58ce345ce4f47810"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for JournalApp.DatabaseInteractor.processEntry(entry: JournalApp.JournalEntrySwiftData) async -&gt; JournalApp.JournalEntrySwiftData"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "18D740BC-2B38-4602-9729-08F4F3F8AC6A - 8e56b4cd45f63df3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for JournalApp.DatabaseInteractor.processEntry(entry: JournalApp.JournalEntrySwiftData) async -&gt; JournalApp.JournalEntrySwiftData"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "18D740BC-2B38-4602-9729-08F4F3F8AC6A - 8e56b4cd45f63df3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for JournalApp.DatabaseInteractor.processEntry(entry: JournalApp.JournalEntrySwiftData) async -&gt; JournalApp.JournalEntrySwiftData"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "18D740BC-2B38-4602-9729-08F4F3F8AC6A - 58ce345ce4f47831"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for JournalApp.DatabaseInteractor.processEntry(entry: JournalApp.JournalEntrySwiftData) async -&gt; JournalApp.JournalEntrySwiftData"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "43755945-6FAF-4149-8140-EF7338C1CDF5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JournalApp/Models/Database/DatabaseInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "keepLatest3TextIdeas()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "43755945-6FAF-4149-8140-EF7338C1CDF5 - f933b1ea5cddbcce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for JournalApp.DatabaseInteractor.dropLast3TextIdeas() async -&gt; ()"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "43755945-6FAF-4149-8140-EF7338C1CDF5 - 7cf170ec79e0b6bc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for JournalAppTests.DatabaseInteractor.dropLast3TextIdeas() async -&gt; ()"
+                  moduleName = "JournalAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "43755945-6FAF-4149-8140-EF7338C1CDF5 - f933b1ea5cddbcce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for JournalApp.DatabaseInteractor.dropLast3TextIdeas() async -&gt; ()"
+                  moduleName = "JournalApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  uuid = "43755945-6FAF-4149-8140-EF7338C1CDF5 - 7cf170ec79e0b6bc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for JournalAppTests.DatabaseInteractor.dropLast3TextIdeas() async -&gt; ()"
+                  moduleName = "JournalAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stepanpazderka/Developer/JournalApp/JournalApp/Models/Database/DatabaseInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "384">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

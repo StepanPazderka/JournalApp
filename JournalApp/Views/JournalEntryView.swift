@@ -9,14 +9,12 @@ import SwiftUI
 import OpenAI
 import Combine
 import RealmSwift
-//import Network
 import SwiftData
 
 struct JournalEntryView: View {
     @Query(sort: \JournalEntrySwiftData.date) var entriesSwiftData: [JournalEntrySwiftData]
-    
-    @ObservedResults(TextIdea.self, sortDescriptor: SortDescriptor(keyPath: "date", ascending: false)) var ideas
-        
+    @Query(sort: \TextIdeaSwiftData.date) var ideasSwiftData: [TextIdeaSwiftData]
+            
     var entryToEdit: JournalEntrySwiftData?
     @StateObject var viewModel = JournalEntryViewModelImpl()
     
@@ -48,7 +46,7 @@ struct JournalEntryView: View {
                 VStack {
                     ZStack {
                         if entryToEdit == nil || journalBody.isEmpty {
-                            if let idea = ideas.randomElement() {
+                            if let idea = ideasSwiftData.randomElement() {
                                 if journalBody.isEmpty {
                                     Text(idea.body.replacingOccurrences(of: "\"", with: ""))
                                         .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
@@ -69,7 +67,11 @@ struct JournalEntryView: View {
                                     .padding(9)
                                     .contextMenu {
                                         Button {
+                                            #if os(macOS)
+                                            NSPasteboard.general.writeObjects([entryToEdit.body! as NSString])
+                                            #else
                                             UIPasteboard.general.string = entryToEdit.body
+                                            #endif
                                             withAnimation {
                                                 showNotificationOverBody = true
                                                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
@@ -122,7 +124,11 @@ struct JournalEntryView: View {
                             .disabled(journalResponse.isEmpty)
                             .contextMenu {
                                 Button {
-                                    UIPasteboard.general.string = journalResponse
+                                    #if os(macOS)
+                                    NSPasteboard.general.writeObjects([entryToEdit!.responseToBodyByAI! as NSString])
+                                    #else
+                                    UIPasteboard.general.string = entryToEdit?.responseToBodyByAI
+                                    #endif
                                     withAnimation {
                                         showNotificationOverResponse = true
                                         DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
@@ -135,9 +141,9 @@ struct JournalEntryView: View {
                                     Label("Copy to clipboard", systemImage: "doc.on.doc")
                                 }
                             }
-                            .opacity(!journalResponse.isEmpty ? 1 : 0)
+                            .opacity(journalResponse.isEmpty ? 0 : 1)
                             .transition(.opacity) // Apply the dissolve effect
-                            .animation(journalResponse.isEmpty ? nil : .easeIn(duration: 1.0), value: entryToEdit == nil)
+                            .animation(!journalResponse.isEmpty ? nil : .easeIn(duration: 0.3), value: self.journalResponse)
                             .lineLimit(nil)
                         if showNotificationOverResponse {
                             Text("Copied into clipboard")
@@ -159,12 +165,17 @@ struct JournalEntryView: View {
                                 progress = 0.1
                                 Task {
                                     if let alreadyWrittenEntry = entryToEdit {
-                                        await viewModel.process(entry: alreadyWrittenEntry)
+                                        let result = await viewModel.process(entry: alreadyWrittenEntry)
+                                        self.journalResponse = result.responseToBodyByAI ?? ""
                                     } else {
                                         let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
                                         context.insert(newEntrySwiftData)
                                         try? context.save()
                                         print(newEntrySwiftData)
+                                        
+                                        let result = await viewModel.process(entry: newEntrySwiftData)
+                                        self.journalResponse = result.responseToBodyByAI ?? ""
+
                                         print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
                                     }
                                 }
@@ -178,10 +189,9 @@ struct JournalEntryView: View {
                 .padding(20)
                 .onAppear {
                     viewModel.setup(context: self.context)
-                    viewModel.deleteAllTextIdeasExceptMostRecentThree()
                     
-                    if let entry = entryToEdit {
-                        self.journalResponse = entry.responseToBodyByAI ?? ""
+                    if let filteredEntry = self.entriesSwiftData.first(where: { $0.date == entryToEdit?.date }) {
+                        self.journalResponse = filteredEntry.responseToBodyByAI ?? ""
                     }
                     
                     viewModel.$showingAlert.sink { value in

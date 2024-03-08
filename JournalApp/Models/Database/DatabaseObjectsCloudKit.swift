@@ -10,11 +10,18 @@ import SwiftData
 
 @Model
 class JournalEntrySwiftData {
-
-    init(date: Date, name: String, body: String) {
+    var date: Date?
+    var name: String?
+    var body: String?
+    var archived: Bool?
+    var bodySummarizedByAI: String?
+    var responseToBodyByAI: String?
+    
+    init(date: Date, name: String, body: String, archived: Bool = false) {
         self.date = date
         self.name = name
         self.body = body
+        self.archived = archived
     }
     
     init(date: Date, name: String, body: String, bodySummarizedByAI: String, responseToBodyByAI: String) {
@@ -24,26 +31,25 @@ class JournalEntrySwiftData {
         self.bodySummarizedByAI = bodySummarizedByAI
         self.responseToBodyByAI = responseToBodyByAI
     }
-    
-    var date: Date?
-    var name: String?
-    var body: String?
-    var bodySummarizedByAI: String?
-    var responseToBodyByAI: String?
-}
-
-extension JournalEntrySwiftData {
-    convenience init(from entity: JournalEntry) {
-        self.init(date: entity.date, name: entity.name, body: entity.body, bodySummarizedByAI: entity.bodySummarizedByAI ?? "", responseToBodyByAI: entity.responseToBodyByAI ?? "")
-    }
 }
 
 @Model
 class TextIdeaSwiftData {
+    var date = Date()
+    var body = ""
+
     internal init(body: String = "") {
         self.body = body
     }
+}
+
+@Model
+class ProfileSwiftData {
+    var name: String?
+    var profile: String?
     
-    var date = Date()
-    var body = ""
+    init(name: String, profile: String) {
+        self.name = name
+        self.profile = profile
+    }
 }
