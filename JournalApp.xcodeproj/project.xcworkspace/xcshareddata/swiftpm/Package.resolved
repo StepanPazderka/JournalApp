@@ -1,5 +1,15 @@
 {
+  "originHash" : "5a185e2ca4b1cce57e670c8e3e0626ba8074a4cc44dfbf7c2f7297f0b14d7739",
   "pins" : [
+    {
+      "identity" : "iqkeyboardmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
+      "state" : {
+        "revision" : "5d30eba093678d05a6d5d1800f8c1d2121c7e3dd",
+        "version" : "7.0.2"
+      }
+    },
     {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
@@ -17,25 +27,7 @@
         "revision" : "ac5892fd0de8d283362ddc30f8e9f1a0eaba8cc0",
         "version" : "0.2.5"
       }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
-      "state" : {
-        "revision" : "31bcd833c8f67b02f319bede83a05c65868258a9",
-        "version" : "13.24.1"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "7e4a5c4a69458714df441898d41d253bbf22dc19"
-      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

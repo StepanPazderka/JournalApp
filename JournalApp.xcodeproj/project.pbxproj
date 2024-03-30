@@ -22,13 +22,12 @@
 		7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */; };
 		7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */; };
 		7F69EB302B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */; };
-		7F69EB322B1A04410016E8A7 /* JournalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB312B1A04410016E8A7 /* JournalListViewModel.swift */; };
 		7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB332B1A04500016E8A7 /* JournalListView.swift */; };
-		7F69EB372B1A08F60016E8A7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB362B1A08F60016E8A7 /* Realm */; };
-		7F69EB392B1A08F60016E8A7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB382B1A08F60016E8A7 /* RealmSwift */; };
 		7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
 		7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
+		7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
+		7FA205EA2B9DFDEF00DCCBF5 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
 		7FC0E7942B265729002EDB73 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC0E7932B265729002EDB73 /* KeychainSwift */; };
 		7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
 		7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
@@ -39,6 +38,7 @@
 		7FF316862B19343B008BA33B /* JournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316852B19343B008BA33B /* JournalEntryView.swift */; };
 		7FF316882B19343C008BA33B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF316872B19343C008BA33B /* Assets.xcassets */; };
 		7FF3168B2B19343C008BA33B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF3168A2B19343C008BA33B /* Preview Assets.xcassets */; };
+		7FF3BF692BB7843F006B4953 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FF3BF682BB7843F006B4953 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,12 +63,13 @@
 		7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModel.swift; sourceTree = "<group>"; };
 		7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModelImpl.swift; sourceTree = "<group>"; };
 		7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModelMock.swift; sourceTree = "<group>"; };
-		7F69EB312B1A04410016E8A7 /* JournalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListViewModel.swift; sourceTree = "<group>"; };
 		7F69EB332B1A04500016E8A7 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
 		7F69EB3B2B1A09910016E8A7 /* DatabaseObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjects.swift; sourceTree = "<group>"; };
 		7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorImpl.swift; sourceTree = "<group>"; };
+		7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSectionModel.swift; sourceTree = "<group>"; };
 		7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+transformToSentence.swift"; sourceTree = "<group>"; };
 		7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectsCloudKit.swift; sourceTree = "<group>"; };
 		7FD19FC92B1DB51800D97901 /* View+hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hidden.swift"; sourceTree = "<group>"; };
@@ -93,10 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F69EB392B1A08F60016E8A7 /* RealmSwift in Frameworks */,
-				7F69EB372B1A08F60016E8A7 /* Realm in Frameworks */,
 				7FC0E7942B265729002EDB73 /* KeychainSwift in Frameworks */,
 				7F69EB2A2B19764F0016E8A7 /* OpenAI in Frameworks */,
+				7FF3BF692BB7843F006B4953 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +128,7 @@
 			children = (
 				7F6EAE812B2A9C8300E97084 /* Network */,
 				7F6EAE802B2A9C7100E97084 /* Database */,
+				7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +187,7 @@
 			children = (
 				7FDF1A502B95FD9A00B0D991 /* Views */,
 				7FF316832B19343B008BA33B /* JournalApp.swift */,
+				7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */,
 				7F0A2CF42B3079ED00FA692E /* Info.plist */,
 				7F0A2CF32B306CF800FA692E /* JournalApp.entitlements */,
 				7F6EAE7F2B2A9C6800E97084 /* Models */,
@@ -195,7 +197,6 @@
 				7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */,
 				7FF316872B19343C008BA33B /* Assets.xcassets */,
 				7FF316892B19343C008BA33B /* Preview Content */,
-				7F69EB312B1A04410016E8A7 /* JournalListViewModel.swift */,
 			);
 			path = JournalApp;
 			sourceTree = "<group>";
@@ -244,9 +245,8 @@
 			name = JournalApp;
 			packageProductDependencies = (
 				7F69EB292B19764F0016E8A7 /* OpenAI */,
-				7F69EB362B1A08F60016E8A7 /* Realm */,
-				7F69EB382B1A08F60016E8A7 /* RealmSwift */,
 				7FC0E7932B265729002EDB73 /* KeychainSwift */,
+				7FF3BF682BB7843F006B4953 /* IQKeyboardManagerSwift */,
 			);
 			productName = JournalApp;
 			productReference = 7FF316802B19343B008BA33B /* JournalApp.app */;
@@ -282,8 +282,8 @@
 			mainGroup = 7FF316772B19343B008BA33B;
 			packageReferences = (
 				7F69EB282B19764F0016E8A7 /* XCRemoteSwiftPackageReference "OpenAI" */,
-				7F69EB352B1A08F60016E8A7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				7FC0E7922B265729002EDB73 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				7FF3BF672BB7843F006B4953 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 7FF316812B19343B008BA33B /* Products */;
 			projectDirPath = "";
@@ -333,11 +333,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA205EA2B9DFDEF00DCCBF5 /* SidebarSectionModel.swift in Sources */,
 				7FF316862B19343B008BA33B /* JournalEntryView.swift in Sources */,
 				7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */,
 				7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */,
 				7F4D08492B87894200F4F47F /* Truncated.swift in Sources */,
 				7F69EB302B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift in Sources */,
+				7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */,
 				7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */,
 				7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */,
 				7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */,
@@ -349,7 +351,6 @@
 				7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */,
 				7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */,
 				7FF316842B19343B008BA33B /* JournalApp.swift in Sources */,
-				7F69EB322B1A04410016E8A7 /* JournalListViewModel.swift in Sources */,
 				7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */,
 				7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */,
 			);
@@ -634,20 +635,20 @@
 				minimumVersion = 0.2.5;
 			};
 		};
-		7F69EB352B1A08F60016E8A7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		7FC0E7922B265729002EDB73 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 20.0.0;
+			};
+		};
+		7FF3BF672BB7843F006B4953 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -658,20 +659,15 @@
 			package = 7F69EB282B19764F0016E8A7 /* XCRemoteSwiftPackageReference "OpenAI" */;
 			productName = OpenAI;
 		};
-		7F69EB362B1A08F60016E8A7 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7F69EB352B1A08F60016E8A7 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		7F69EB382B1A08F60016E8A7 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7F69EB352B1A08F60016E8A7 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		7FC0E7932B265729002EDB73 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FC0E7922B265729002EDB73 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		7FF3BF682BB7843F006B4953 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FF3BF672BB7843F006B4953 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealmSwift
 import SwiftData
 
 struct ProfileView: View {
@@ -14,15 +13,28 @@ struct ProfileView: View {
         
     var body: some View {
         if let profile = profiles.first?.profile {
-            ScrollView {
-                Text(profile)
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.green.opacity(0.1), Color.blue.opacity(0.05)]), startPoint: .top, endPoint: .bottom))
-                    .cornerRadius(25)
+            NavigationStack {
+                ScrollView {
+                    Text(profile)
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.green.opacity(0.1), Color.blue.opacity(0.05)]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(25)
+                }
+                .padding([.leading, .trailing])
+                .navigationTitle("Profile")
             }
-            .padding([.leading, .trailing])
+        } else {
+            NavigationStack {
+                ScrollView {
+                    Text("Hi, my name is Lumi and I will be your Journal friend. Just add an entry to your Journal to help me learn about you.")
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.green.opacity(0.1), Color.blue.opacity(0.05)]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(25)
+                }
+                .padding([.leading, .trailing])
+                .navigationTitle("Profile")
+            }
         }
-        
     }
 }
 

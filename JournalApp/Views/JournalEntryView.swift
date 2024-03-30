@@ -8,7 +8,6 @@
 import SwiftUI
 import OpenAI
 import Combine
-import RealmSwift
 import SwiftData
 
 struct JournalEntryView: View {

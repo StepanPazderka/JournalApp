@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-import RealmSwift
 import SwiftData
 
 struct JournalListView: View {
     @Environment(\.modelContext) private var context
     
     @Query(filter: #Predicate<JournalEntrySwiftData> { journalEntry in
-        return !(journalEntry.archived ?? true)
+        return !(journalEntry.archived ?? false)
     }, sort: \JournalEntrySwiftData.date, order: .reverse) var journalEntriesSwiftData: [JournalEntrySwiftData]
     
     @Query(filter: #Predicate<JournalEntrySwiftData> { journalEntry in
@@ -31,7 +30,6 @@ struct JournalListView: View {
     @State var showingRenameDialog = false
     @State var showingDeletedPosts = false
     
-    @State private var selectedEntry: JournalEntrySwiftData?
     @State private var showingAddNewJournalEntry = false
     
     @State var nameForRenaming = ""
@@ -41,98 +39,102 @@ struct JournalListView: View {
         deletedJournalEntriesSwiftData.isEmpty ? 0.0 : 50.0
     }
     
+    var justSomeTestFirstMenuContent: [SidebarSectionModel] = {
+        var array = Array<SidebarSectionModel>()
+        array.append(SidebarSectionModel(id: .journalEntries, iconName: "list.dash", text: "Journal"))
+        array.append(SidebarSectionModel(id: .deletedEntries, iconName: "trash", text: "Deleted Entries"))
+        array.append(SidebarSectionModel(id: .profileScreen, iconName: "person.fill", text: "Profile"))
+        return array
+    }()
+    
+    @State var selectedJournalEntryID: JournalEntrySwiftData?
+    
     var body: some View {
         NavigationSplitView {
-            VStack {
-                List(selection: $selectedEntry) {
-                    ForEach(entriesForView) { (entry: JournalEntrySwiftData) in
-                        NavigationLink {
-                            JournalEntryView(entry: entry)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(entry.name?.transformToSentenceCase() ?? entry.body!.truncated(to: 25))
-                                    .font(.headline)
-                                    .multilineTextAlignment(.leading)
-                                    .frame(height: 50)
-                                Text(format(Date: entry.date ?? .now))
-                                    .font(.system(size: 10))
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.bottom, 0.0)
-                                    .opacity(0.5)
-                            }
-                            .padding(.horizontal, 15)
-                            .contextMenu {
-                                Button {
-                                    selectedEntry = entry
-                                    if let selectedEntry {
-                                        nameForRenaming = selectedEntry.name ?? ""
-                                    }
-                                    showingRenameDialog = true
-                                } label: {
-                                    Label("Rename", systemImage: "pencil")
-                                }
-                            }
-                            .swipeActions(edge: .trailing) {
-                                if !showingDeletedPosts {
-                                    Button(role: .destructive) {
-                                        entry.archived = true
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                } else {
-                                    Button {
-                                        entry.archived = false
-                                    } label: {
-                                        Label("Revert", systemImage: "arrow.uturn.backward")
-                                    }
-                                }
-                            }
-                        }
+            List(entriesForView, selection: $selectedJournalEntryID) { entry in
+                NavigationLink(destination: {
+                    JournalEntryView(entry: entry)
+                        .navigationTitle(entry.name ?? "")
+                }) {
+                    VStack(alignment: .leading) {
+                        Text(entry.name?.transformToSentenceCase() ?? entry.body!.truncated(to: 25))
+                            .font(.headline)
+                            .multilineTextAlignment(.leading)
+                            .frame(height: 50)
+                        Text(format(Date: entry.date ?? .now))
+                            .font(.system(size: 10))
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom, 0.0)
+                            .opacity(0.5)
                     }
-                    
                 }
-                .navigationTitle( showingDeletedPosts ? "Deleted posts" : "Lumi")
-                .toolbar {
-                    ToolbarItem(placement: .automatic) {
+                .padding(.horizontal, 15)
+                .contextMenu {
+                    Button {
+                        if let selectedEntry = selectedJournalEntryID {
+                            nameForRenaming = selectedEntry.name ?? ""
+                        }
+                        showingRenameDialog = true
+                    } label: {
+                        Label("Rename", systemImage: "pencil")
+                    }
+                }
+                .swipeActions(edge: .trailing) {
+                    if !showingDeletedPosts {
+                        Button(role: .destructive) {
+                            entry.archived = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    } else {
                         Button {
-                            showingAddNewJournalEntry = true
-                        } label: {
-                            Image(systemName: "plus")
-                        }
-                    }
-                }
-                .sheet(isPresented: $showingAddNewJournalEntry, content: {
-                    JournalEntryView()
-                })
-                .alert("Rename entry", isPresented: $showingRenameDialog) {
-                    TextField("Enter entry name", text: $nameForRenaming)
-                    Button("OK", role: .cancel) {
-                        if let selectedEntry {
-                            selectedEntry.name = nameForRenaming
-                            context.insert(selectedEntry)
-                        }
-                    }
-                }
-                .overlay {
-                    if entriesForView.isEmpty {
-                        VStack {
-                            if showingDeletedPosts {
-                                Text("No deleted entries")
-                            } else {
-                                Text("No journal entries")
+                            entry.archived = false
+                            if archivedPostsBarHeight == 0 {
+                                showingDeletedPosts = false
                             }
+                        } label: {
+                            Label("Revert", systemImage: "arrow.uturn.backward")
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
-                .onAppear {
-                    if !deletedJournalEntriesSwiftData.isEmpty {
-                        withAnimation {
-                            showingDeletedPostsBar = true
+            }
+            .onChange(of: showingDeletedPosts, { oldValue, newValue in
+                showingDeletedPostsBar = newValue
+            })
+            .navigationTitle(showingDeletedPosts ? "Deleted posts" : "Journal")
+            .sheet(isPresented: $showingAddNewJournalEntry, content: {
+                JournalEntryView()
+            })
+            .alert("Rename entry", isPresented: $showingRenameDialog) {
+                TextField("Enter entry name", text: $nameForRenaming)
+                Button("OK", role: .cancel) {
+                    if let selectedEntry = selectedJournalEntryID {
+                        selectedEntry.name = nameForRenaming
+                        context.insert(selectedEntry)
+                    }
+                }
+            }
+            .overlay {
+                if entriesForView.isEmpty {
+                    VStack {
+                        if showingDeletedPosts {
+                            Text("No deleted entries")
+                        } else {
+                            Text("No journal entries")
                         }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+            .onAppear {
+                if !deletedJournalEntriesSwiftData.isEmpty {
+                    withAnimation {
+                        showingDeletedPostsBar = true
                     }
                 }
                 
+            }
+            .overlay(alignment: .bottom) {
                 Button {
                     showingDeletedPosts.toggle()
                 } label: {
@@ -151,16 +153,25 @@ struct JournalListView: View {
                 .frame(height: archivedPostsBarHeight)
                 .animation(.easeInOut(duration: 0.5), value: archivedPostsBarHeight)
                 .opacity(!deletedJournalEntriesSwiftData.isEmpty || showingDeletedPosts ? 1 : 0)
+                
             }
-        } detail: {
-            Text("Select journal entry or create a new one")
-            Button {
-                showingAddNewJournalEntry.toggle()
-            } label: {
-                Image(systemName: "plus")
-                    .resizable()
-                    .frame(width: 50, height: 50, alignment: .center)
-                    .padding([.top], 20)
+            .navigationDestination(for: JournalEntrySwiftData.self) { entry in
+                JournalEntryView(entry: entry)
+            }
+        }
+        detail: {
+            if let selectedJournalEntryID {
+                JournalEntryView(entry: selectedJournalEntryID)
+            } else {
+                Text("Select journal entry or create a new one")
+                Button {
+                    showingAddNewJournalEntry.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .padding([.top], 20)
+                }
             }
         }
     }

@@ -17,7 +17,7 @@ class NetworkInteractorMock: NetworkInteractor {
 
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
-            var output = "Just some generic text output"
+            let output = "Just some generic text output"
             return .success(output.cleaned().replacingSmileysWithEmojis().cleanString())
         } catch {
             print(error.localizedDescription)

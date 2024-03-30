@@ -8,7 +8,6 @@
 import Foundation
 import OpenAI
 import Combine
-import RealmSwift
 import SwiftUI
 
 import SwiftData
