@@ -15,7 +15,7 @@
 		7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
 		7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44EDE62B1FC60600A50C58 /* ProfileView.swift */; };
-		7F4D08492B87894200F4F47F /* Truncated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D08482B87894200F4F47F /* Truncated.swift */; };
+		7F4D08492B87894200F4F47F /* String+truncated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D08482B87894200F4F47F /* String+truncated.swift */; };
 		7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */; };
 		7F69EB272B1966BA0016E8A7 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F69EB2A2B19764F0016E8A7 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB292B19764F0016E8A7 /* OpenAI */; };
@@ -32,6 +32,7 @@
 		7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
 		7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
 		7FD19FCA2B1DB51800D97901 /* View+hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD19FC92B1DB51800D97901 /* View+hidden.swift */; };
+		7FD438CC2BBB8FD500DB31F0 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD438CB2BBB8FD500DB31F0 /* ViewType.swift */; };
 		7FDF1A522B9639F900B0D991 /* NetworkInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */; };
 		7FDF1A542B966D0E00B0D991 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
 		7FF316842B19343B008BA33B /* JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316832B19343B008BA33B /* JournalApp.swift */; };
@@ -39,6 +40,7 @@
 		7FF316882B19343C008BA33B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF316872B19343C008BA33B /* Assets.xcassets */; };
 		7FF3168B2B19343C008BA33B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF3168A2B19343C008BA33B /* Preview Assets.xcassets */; };
 		7FF3BF692BB7843F006B4953 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FF3BF682BB7843F006B4953 /* IQKeyboardManagerSwift */; };
+		7FF3BF6D2BB9B2BA006B4953 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF3BF6C2BB9B2BA006B4953 /* EmptyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,14 +59,13 @@
 		7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTests.swift; sourceTree = "<group>"; };
 		7F44EDE62B1FC60600A50C58 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		7F4D08482B87894200F4F47F /* Truncated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truncated.swift; sourceTree = "<group>"; };
+		7F4D08482B87894200F4F47F /* String+truncated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+truncated.swift"; sourceTree = "<group>"; };
 		7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+existingModel.swift"; sourceTree = "<group>"; };
 		7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cleanedUp.swift"; sourceTree = "<group>"; };
 		7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModel.swift; sourceTree = "<group>"; };
 		7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModelImpl.swift; sourceTree = "<group>"; };
 		7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModelMock.swift; sourceTree = "<group>"; };
 		7F69EB332B1A04500016E8A7 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
-		7F69EB3B2B1A09910016E8A7 /* DatabaseObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjects.swift; sourceTree = "<group>"; };
 		7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorImpl.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+transformToSentence.swift"; sourceTree = "<group>"; };
 		7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectsCloudKit.swift; sourceTree = "<group>"; };
 		7FD19FC92B1DB51800D97901 /* View+hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hidden.swift"; sourceTree = "<group>"; };
+		7FD438CB2BBB8FD500DB31F0 /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
 		7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorMock.swift; sourceTree = "<group>"; };
 		7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractorMock.swift; sourceTree = "<group>"; };
 		7FF316802B19343B008BA33B /* JournalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		7FF316852B19343B008BA33B /* JournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryView.swift; sourceTree = "<group>"; };
 		7FF316872B19343C008BA33B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FF3168A2B19343C008BA33B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7FF3BF6C2BB9B2BA006B4953 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +120,7 @@
 				7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */,
 				7FD19FC92B1DB51800D97901 /* View+hidden.swift */,
 				7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */,
-				7F4D08482B87894200F4F47F /* Truncated.swift */,
+				7F4D08482B87894200F4F47F /* String+truncated.swift */,
 				7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */,
 			);
 			path = Utilities;
@@ -137,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */,
-				7F69EB3B2B1A09910016E8A7 /* DatabaseObjects.swift */,
 				7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */,
 				7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */,
 			);
@@ -160,6 +162,7 @@
 				7F69EB332B1A04500016E8A7 /* JournalListView.swift */,
 				7FF316852B19343B008BA33B /* JournalEntryView.swift */,
 				7F44EDE62B1FC60600A50C58 /* ProfileView.swift */,
+				7FF3BF6C2BB9B2BA006B4953 /* EmptyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */,
 				7FF316872B19343C008BA33B /* Assets.xcassets */,
 				7FF316892B19343C008BA33B /* Preview Content */,
+				7FD438CB2BBB8FD500DB31F0 /* ViewType.swift */,
 			);
 			path = JournalApp;
 			sourceTree = "<group>";
@@ -337,7 +341,7 @@
 				7FF316862B19343B008BA33B /* JournalEntryView.swift in Sources */,
 				7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */,
 				7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */,
-				7F4D08492B87894200F4F47F /* Truncated.swift in Sources */,
+				7F4D08492B87894200F4F47F /* String+truncated.swift in Sources */,
 				7F69EB302B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift in Sources */,
 				7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */,
 				7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */,
@@ -349,9 +353,11 @@
 				7FDF1A522B9639F900B0D991 /* NetworkInteractorMock.swift in Sources */,
 				7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */,
 				7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */,
+				7FD438CC2BBB8FD500DB31F0 /* ViewType.swift in Sources */,
 				7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */,
 				7FF316842B19343B008BA33B /* JournalApp.swift in Sources */,
 				7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */,
+				7FF3BF6D2BB9B2BA006B4953 /* EmptyView.swift in Sources */,
 				7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

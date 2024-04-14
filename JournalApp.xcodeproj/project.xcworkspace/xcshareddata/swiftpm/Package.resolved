@@ -1,5 +1,5 @@
 {
-  "originHash" : "5a185e2ca4b1cce57e670c8e3e0626ba8074a4cc44dfbf7c2f7297f0b14d7739",
+  "originHash" : "4f0dfff61c367c2093fa92789c427a3457ecc590ae731dda46f33fc85b0dc2b4",
   "pins" : [
     {
       "identity" : "iqkeyboardmanager",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MacPaw/OpenAI.git",
       "state" : {
-        "revision" : "ac5892fd0de8d283362ddc30f8e9f1a0eaba8cc0",
-        "version" : "0.2.5"
+        "revision" : "35afc9a6ee127b8f22a85a31aec2036a987478af",
+        "version" : "0.2.6"
       }
     }
   ],

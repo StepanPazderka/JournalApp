@@ -13,8 +13,10 @@ import SwiftData
 struct JournalEntryView: View {
     @Query(sort: \JournalEntrySwiftData.date) var entriesSwiftData: [JournalEntrySwiftData]
     @Query(sort: \TextIdeaSwiftData.date) var ideasSwiftData: [TextIdeaSwiftData]
-            
-    var entryToEdit: JournalEntrySwiftData?
+		
+	let icloudDefaults = NSUbiquitousKeyValueStore.default
+
+    var entry: JournalEntrySwiftData?
     @StateObject var viewModel = JournalEntryViewModelImpl()
     
     @State var journalBody = ""
@@ -33,43 +35,44 @@ struct JournalEntryView: View {
     
     @State private var cancellables = Set<AnyCancellable>()
         
-    init(entry: JournalEntrySwiftData? = nil) {
+	init(entry: JournalEntrySwiftData? = nil) {
         self.journalBody = entry?.body ?? ""
         self.journalResponse = entry?.responseToBodyByAI ?? ""
-        self.entryToEdit = entry
+        self.entry = entry
     }
     
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
+					// MARK: TextEditor
                     ZStack {
-                        if entryToEdit == nil || journalBody.isEmpty {
+                        if entry == nil || journalBody.isEmpty {
                             if let idea = ideasSwiftData.randomElement() {
                                 if journalBody.isEmpty {
                                     Text(idea.body.replacingOccurrences(of: "\"", with: ""))
-                                        .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
-                                        .padding(17)
+										.padding(9)
+                                        .opacity((entry == nil && journalBody.isEmpty) ? 0.2 : 0.0)
                                         .multilineTextAlignment(.leading)
-                                        .disabled(entryToEdit != nil)
+                                        .disabled(entry != nil)
                                 }
                             } else {
-                                Text(journalBody.isEmpty || entryToEdit != nil ? "Enter text here" : "")
-                                    .opacity((entryToEdit == nil && journalBody.isEmpty) ? 0.2 : 0.0)
+                                Text(journalBody.isEmpty || entry != nil ? "Enter text here" : "")
+                                    .opacity((entry == nil && journalBody.isEmpty) ? 0.2 : 0.0)
                                     .multilineTextAlignment(.leading)
                                     .disabled(!journalBody.isEmpty)
                             }
                         }
-                        if let entryToEdit {
+						if let entry {
                             ZStack {
-                                Text(entryToEdit.body ?? "")
+                                Text(entry.body ?? "")
                                     .padding(9)
                                     .contextMenu {
                                         Button {
                                             #if os(macOS)
-                                            NSPasteboard.general.writeObjects([entryToEdit.body! as NSString])
+                                            NSPasteboard.general.writeObjects([entry.body! as NSString])
                                             #else
-                                            UIPasteboard.general.string = entryToEdit.body
+                                            UIPasteboard.general.string = entry.body
                                             #endif
                                             withAnimation {
                                                 showNotificationOverBody = true
@@ -90,8 +93,8 @@ struct JournalEntryView: View {
                                         .background(Color.blue)
                                         .foregroundColor(.white)
                                         .cornerRadius(10)
-                                        .opacity(showNotificationOverBody ? 1 : 0) // Apply opacity animation
-                                        .transition(.opacity) // Fade in and out
+                                        .opacity(showNotificationOverBody ? 1 : 0)
+                                        .transition(.opacity)
                                 }
                             }
                         } else {
@@ -115,8 +118,9 @@ struct JournalEntryView: View {
                             .padding(.all, 8)
                     }
                     
+					// MARK: Response
                     ZStack {
-                        Text(entryToEdit?.responseToBodyByAI ?? journalResponse)
+                        Text(entry?.responseToBodyByAI ?? journalResponse)
                             .padding()
                             .background(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.green.opacity(0.1), Color.blue.opacity(0.05)]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(25)
@@ -124,9 +128,9 @@ struct JournalEntryView: View {
                             .contextMenu {
                                 Button {
                                     #if os(macOS)
-                                    NSPasteboard.general.writeObjects([entryToEdit!.responseToBodyByAI! as NSString])
+                                    NSPasteboard.general.writeObjects([entry!.responseToBodyByAI! as NSString])
                                     #else
-                                    UIPasteboard.general.string = entryToEdit?.responseToBodyByAI
+                                    UIPasteboard.general.string = entry?.responseToBodyByAI
                                     #endif
                                     withAnimation {
                                         showNotificationOverResponse = true
@@ -141,7 +145,7 @@ struct JournalEntryView: View {
                                 }
                             }
                             .opacity(journalResponse.isEmpty ? 0 : 1)
-                            .transition(.opacity) // Apply the dissolve effect
+                            .transition(.opacity)
                             .animation(!journalResponse.isEmpty ? nil : .easeIn(duration: 0.3), value: self.journalResponse)
                             .lineLimit(nil)
                         if showNotificationOverResponse {
@@ -150,35 +154,19 @@ struct JournalEntryView: View {
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
-                                .opacity(showNotificationOverResponse ? 1 : 0) // Apply opacity animation
-                                .transition(.opacity) // Fade in and out
+                                .opacity(showNotificationOverResponse ? 1 : 0)
+                                .transition(.opacity)
                         }
                         ProgressView(value: progress)
                             .progressViewStyle(.circular)
                             .hidden(!journalResponse.isEmpty || progress == 0)
                         
                         Spacer()
+						
+						// MARK: Save button
                         if journalResponse.isEmpty {
                             Button("Save") {
-                                textEditorDisabled = true
-                                progress = 0.1
-                                Task {
-                                    if let alreadyWrittenEntry = entryToEdit {
-                                        let result = await viewModel.process(entry: alreadyWrittenEntry)
-                                        self.journalResponse = result.responseToBodyByAI ?? ""
-                                    } else {
-                                        let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
-                                        context.insert(newEntrySwiftData)
-                                        try? context.save()
-                                        print(newEntrySwiftData)
-                                        
-                                        let result = await viewModel.process(entry: newEntrySwiftData)
-                                        self.journalResponse = result.responseToBodyByAI ?? ""
-
-                                        print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
-                                    }
-                                }
-                                progress = 1.0
+								self.saveJournalEntry()
                             }
                             .frame(height: 50)
                             .hidden(!journalResponse.isEmpty || progress > 0)
@@ -189,10 +177,23 @@ struct JournalEntryView: View {
                 .onAppear {
                     viewModel.setup(context: self.context)
                     
-                    if let filteredEntry = self.entriesSwiftData.first(where: { $0.date == entryToEdit?.date }) {
+                    if let filteredEntry = self.entriesSwiftData.first(where: { $0.date == entry?.date }) {
                         self.journalResponse = filteredEntry.responseToBodyByAI ?? ""
                     }
                     
+					if let savedTextFromCloud = icloudDefaults.object(forKey: "draft") as? String {
+						self.journalBody = savedTextFromCloud
+						print("Saved text from iCloud: \(savedTextFromCloud)")
+					}
+					
+					if let response = entry?.responseToBodyByAI, response.isEmpty {
+						DispatchQueue.global().asyncAfter(deadline: .now()+0.1) {
+							self.journalBody.append(" ")
+							usleep(100)
+							self.journalBody.removeLast()
+						}
+					}
+					
                     viewModel.$showingAlert.sink { value in
                         self.progress = 0.0
                     }.store(in: &cancellables)
@@ -200,9 +201,36 @@ struct JournalEntryView: View {
                 .alert(viewModel.alertMessage, isPresented: $viewModel.showingAlert) {
                     Button("OK", role: .cancel) { }
                 }
+				.onChange(of: journalBody) { oldValue, newValue in
+					if journalResponse.isEmpty {
+						icloudDefaults.set(newValue, forKey: "draft")
+					}
+				}
             }
         }
     }
+	
+	func saveJournalEntry() {
+		textEditorDisabled = true
+		progress = 0.1
+		Task {
+			if let alreadyWrittenEntry = entry {
+				let result = await viewModel.process(entry: alreadyWrittenEntry)
+				self.journalResponse = result.responseToBodyByAI ?? ""
+			} else {
+				let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
+				context.insert(newEntrySwiftData)
+				try? context.save()
+				print(newEntrySwiftData)
+				
+				let result = await viewModel.process(entry: newEntrySwiftData)
+				self.journalResponse = result.responseToBodyByAI ?? ""
+				icloudDefaults.removeObject(forKey: "draft")
+				print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
+			}
+		}
+		progress = 1.0
+	}
 }
 //
 //#Preview {

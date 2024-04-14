@@ -11,7 +11,6 @@ import SwiftData
 enum DatabaseInteractorError: Error {
     case cantLoadObjects
     case unknown
-    case cantFindRealm
 }
 
 @ModelActor

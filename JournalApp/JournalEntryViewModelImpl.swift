@@ -18,7 +18,7 @@ final class JournalEntryViewModelImpl: JournalViewModel {
     @Published var showingAlert = false
     @Published var alertMessage = ""
     
-    public var context: ModelContext!
+    private var context: ModelContext!
     private var databaseInteractor: DatabaseInteractor!
     public let entry: JournalEntrySwiftData?
     
