@@ -163,13 +163,6 @@ struct JournalListView: View {
             }
         }
     }
-    
-    func format(Date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: Date)
-    }
 }
 
 #Preview {
