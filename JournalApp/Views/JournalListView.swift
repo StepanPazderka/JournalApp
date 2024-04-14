@@ -39,14 +39,6 @@ struct JournalListView: View {
         deletedJournalEntriesSwiftData.isEmpty ? 0.0 : 50.0
     }
     
-    var justSomeTestFirstMenuContent: [SidebarSectionModel] = {
-        var array = Array<SidebarSectionModel>()
-        array.append(SidebarSectionModel(id: .journalEntries, iconName: "list.dash", text: "Journal"))
-        array.append(SidebarSectionModel(id: .deletedEntries, iconName: "trash", text: "Deleted Entries"))
-        array.append(SidebarSectionModel(id: .profileScreen, iconName: "person.fill", text: "Profile"))
-        return array
-    }()
-    
     @State var selectedJournalEntryID: JournalEntrySwiftData?
     
     var body: some View {
@@ -71,10 +63,8 @@ struct JournalListView: View {
                 .padding(.horizontal, 15)
                 .contextMenu {
                     Button {
-                        if let selectedEntry = selectedJournalEntryID {
-                            nameForRenaming = selectedEntry.name ?? ""
-                        }
-                        showingRenameDialog = true
+						nameForRenaming = entry.name ?? ""
+						showingRenameDialog = true
                     } label: {
                         Label("Rename", systemImage: "pencil")
                     }
@@ -97,6 +87,13 @@ struct JournalListView: View {
                         }
                     }
                 }
+				.alert("Rename entry", isPresented: $showingRenameDialog) {
+					TextField("Enter entry name", text: $nameForRenaming)
+					Button("OK", role: .cancel) {
+						entry.name = nameForRenaming
+						context.insert(entry)
+					}
+				}
             }
             .onChange(of: showingDeletedPosts, { oldValue, newValue in
                 showingDeletedPostsBar = newValue
@@ -105,15 +102,6 @@ struct JournalListView: View {
             .sheet(isPresented: $showingAddNewJournalEntry, content: {
                 JournalEntryView()
             })
-            .alert("Rename entry", isPresented: $showingRenameDialog) {
-                TextField("Enter entry name", text: $nameForRenaming)
-                Button("OK", role: .cancel) {
-                    if let selectedEntry = selectedJournalEntryID {
-                        selectedEntry.name = nameForRenaming
-                        context.insert(selectedEntry)
-                    }
-                }
-            }
             .overlay {
                 if entriesForView.isEmpty {
                     VStack {

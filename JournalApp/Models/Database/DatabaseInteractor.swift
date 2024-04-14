@@ -19,7 +19,7 @@ actor DatabaseInteractor {
         
     func loadUserProfile() async -> String {
         do {
-            let objects = try await modelContainer.mainContext.fetch(FetchDescriptor<ProfileSwiftData>())
+            let objects = try modelContext.fetch(FetchDescriptor<ProfileSwiftData>())
             
             if let profileTest = objects.first?.profile {
                 return profileTest
@@ -32,7 +32,7 @@ actor DatabaseInteractor {
     }
     
     func keepLatest3TextIdeas() async {
-        let ideas = try? await modelContainer.mainContext.fetch(FetchDescriptor<TextIdeaSwiftData>(sortBy: [SortDescriptor(\TextIdeaSwiftData.date)]))
+        let ideas = try? modelContext.fetch(FetchDescriptor<TextIdeaSwiftData>(sortBy: [SortDescriptor(\TextIdeaSwiftData.date)]))
         
         guard let ideas else { return }
         
@@ -45,19 +45,19 @@ actor DatabaseInteractor {
         }
         
         for idea in ideasToRemove {
-            await modelContainer.mainContext.delete(idea)
+			modelContext.delete(idea)
         }
     }
     
     func updateProfile(updatedProfile: String) async {
-        let fetchedProfileObjects = try? await modelContainer.mainContext.fetch(FetchDescriptor<ProfileSwiftData>())
+        let fetchedProfileObjects = try? modelContext.fetch(FetchDescriptor<ProfileSwiftData>())
         
-        if var profileFetched = fetchedProfileObjects?.first {
+        if let profileFetched = fetchedProfileObjects?.first {
             profileFetched.profile = updatedProfile
-            try? await self.modelContainer.mainContext.insert(profileFetched)
+            modelContext.insert(profileFetched)
         } else {
             let newProfile = ProfileSwiftData(name: "", profile: updatedProfile)
-            try? await self.modelContainer.mainContext.insert(newProfile)
+            modelContext.insert(newProfile)
         }
     }
     
@@ -74,19 +74,23 @@ actor DatabaseInteractor {
         switch await bodyAnalysisResult {
         case .success(let output):
             entry.responseToBodyByAI = output
-            try? await self.modelContainer.mainContext.save()
+			if modelContext.hasChanges {
+				try? modelContext.save()
+			}
         case .failure(_):
             break
         }
         
         // MARK: - Analyzing title
-        let TitleInstruction = "Create a title for this text: \(entry.body) and ONLY send back a title, nothing else. Try to make that title about 5 words. Write it as one single sentence and dont be too romantic. Dont use special characters. Just output title text."
+		let TitleInstruction = "Create a title for this text: \(String(describing: entry.body)) and ONLY send back a title, nothing else. Try to make that title about 5 words. Write it as one single sentence and dont be too romantic. Dont use special characters. Just output title text."
         
         async let TitleInstructionResult = await networkInteractor.getAIoutput(instruction: TitleInstruction, model: .gpt3_5Turbo_16k)
         switch await TitleInstructionResult {
         case .success(let output):
             entry.name = output
-            try? await self.modelContainer.mainContext.save()
+			if modelContext.hasChanges {
+				try? modelContext.save()
+			}
         case .failure(_):
             break
         }
@@ -100,13 +104,11 @@ actor DatabaseInteractor {
             }
         }
         
-        var updatedProfile = profile
         if let profileInstruction {
             async let result = await networkInteractor.getAIoutput(instruction: profileInstruction, model: .gpt3_5Turbo_16k)
             switch await result {
             case .success(let output):
                 await self.updateProfile(updatedProfile: output)
-                updatedProfile = output
             case .failure(_):
                 break
             }
@@ -119,8 +121,7 @@ actor DatabaseInteractor {
         switch await newTextIdeaResult {
         case .success(let output):
             let newTextIdea = TextIdeaSwiftData(body: output)
-            await self.modelContainer.mainContext.insert(newTextIdea)
-            updatedProfile = output
+			modelContext.insert(newTextIdea)
         case .failure(_):
             break
         }

@@ -183,7 +183,6 @@ struct JournalEntryView: View {
                     
 					if let savedTextFromCloud = icloudDefaults.object(forKey: "draft") as? String {
 						self.journalBody = savedTextFromCloud
-						print("Saved text from iCloud: \(savedTextFromCloud)")
 					}
 					
 					if let response = entry?.responseToBodyByAI, response.isEmpty {
@@ -196,7 +195,7 @@ struct JournalEntryView: View {
 					
                     viewModel.$showingAlert.sink { value in
                         self.progress = 0.0
-                    }.store(in: &cancellables)
+					}.store(in: &cancellables)
                 }
                 .alert(viewModel.alertMessage, isPresented: $viewModel.showingAlert) {
                     Button("OK", role: .cancel) { }
