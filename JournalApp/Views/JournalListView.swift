@@ -39,7 +39,8 @@ struct JournalListView: View {
         deletedJournalEntriesSwiftData.isEmpty ? 0.0 : 50.0
     }
     
-    @State var selectedJournalEntryID: JournalEntrySwiftData?
+	@State private var journalEntryForRenaming: JournalEntrySwiftData?
+    @State private var selectedJournalEntryID: JournalEntrySwiftData?
     
     var body: some View {
         NavigationSplitView {
@@ -63,7 +64,8 @@ struct JournalListView: View {
                 .padding(.horizontal, 15)
                 .contextMenu {
                     Button {
-						nameForRenaming = entry.name ?? ""
+						journalEntryForRenaming = entry
+						nameForRenaming = journalEntryForRenaming?.name ?? ""
 						showingRenameDialog = true
                     } label: {
                         Label("Rename", systemImage: "pencil")
@@ -87,13 +89,6 @@ struct JournalListView: View {
                         }
                     }
                 }
-				.alert("Rename entry", isPresented: $showingRenameDialog) {
-					TextField("Enter entry name", text: $nameForRenaming)
-					Button("OK", role: .cancel) {
-						entry.name = nameForRenaming
-						context.insert(entry)
-					}
-				}
             }
             .onChange(of: showingDeletedPosts, { oldValue, newValue in
                 showingDeletedPostsBar = newValue
@@ -134,18 +129,30 @@ struct JournalListView: View {
                             Image(systemName: "list.bullet")
                             Text("Journal entries")
                         }
-                        
                     }
                     .padding([.top, .bottom], 10)
                 }
                 .frame(height: archivedPostsBarHeight)
                 .animation(.easeInOut(duration: 0.5), value: archivedPostsBarHeight)
                 .opacity(!deletedJournalEntriesSwiftData.isEmpty || showingDeletedPosts ? 1 : 0)
-                
             }
             .navigationDestination(for: JournalEntrySwiftData.self) { entry in
                 JournalEntryView(entry: entry)
             }
+			.alert("Rename entry", isPresented: $showingRenameDialog) {
+				TextField("Enter entry name", text: $nameForRenaming)
+				Button("OK", role: .none) {
+					if let journalEntryForRenaming {
+						withAnimation {
+							journalEntryForRenaming.name = nameForRenaming
+							context.insert(journalEntryForRenaming)
+						}
+					}
+				}
+				Button("Cancel", role: .cancel) {
+					showingRenameDialog = false
+				}
+			}
         }
         detail: {
             if let selectedJournalEntryID {
