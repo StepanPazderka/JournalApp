@@ -231,11 +231,16 @@ struct JournalEntryView: View {
 			}
 			.alert("Rename entry", isPresented: $showingRenameDialog) {
 				TextField("Enter entry name", text: $nameForRenaming)
-				Button("OK", role: .cancel) {
-					if let entry {
-						entry.name = nameForRenaming
-						context.insert(entry)
+				Button("OK", role: .none) {
+					withAnimation {
+						if let entry {
+							entry.name = nameForRenaming
+							context.insert(entry)
+						}
 					}
+				}
+				Button("Cancel", role: .cancel) {
+					showingRenameDialog = false
 				}
 			}
 		}
