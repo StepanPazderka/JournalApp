@@ -16,6 +16,8 @@ final class NetworkInteractorImpl: NetworkInteractor {
     init() {
 		if let apiKey = readFirstLineOfFileInBundle(fileName: "api", fileType: "txt") {
 			client = OpenAI(configuration: OpenAI.Configuration(token: apiKey))
+		} else {
+			fatalError("You need to put your chatGPT api key into api.txt")
 		}
     }
     
