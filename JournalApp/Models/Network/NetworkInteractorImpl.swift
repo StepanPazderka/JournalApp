@@ -14,8 +14,9 @@ final class NetworkInteractorImpl: NetworkInteractor {
     static public let shared = NetworkInteractorImpl()
     
     init() {
-        let apiKey = "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"
-        client = OpenAI(configuration: OpenAI.Configuration(token: apiKey))
+		if let apiKey = readFirstLineOfFileInBundle(fileName: "api", fileType: "txt") {
+			client = OpenAI(configuration: OpenAI.Configuration(token: apiKey))
+		}
     }
     
     func getAIoutput(instruction: String, model: Model) async -> Result<String, Error> {

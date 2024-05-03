@@ -20,6 +20,8 @@ struct JournalApp: SwiftUI.App {
     }()
     
     var body: some Scene {
+		let databaseInteractor = DatabaseInteractor(modelContainer: container)
+		
         WindowGroup {
             MainTabView()
                 .onAppear {
@@ -27,5 +29,6 @@ struct JournalApp: SwiftUI.App {
                 }
         }
         .modelContainer(container)
+		.environmentObject(databaseInteractor)
     }
 }

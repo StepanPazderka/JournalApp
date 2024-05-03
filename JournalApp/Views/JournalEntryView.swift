@@ -14,6 +14,8 @@ struct JournalEntryView: View {
 	@Query(sort: \JournalEntrySwiftData.date) var entriesSwiftData: [JournalEntrySwiftData]
 	@Query(sort: \TextIdeaSwiftData.date) var ideasSwiftData: [TextIdeaSwiftData]
 	
+	@EnvironmentObject var databaseInteractor: DatabaseInteractor
+	
 	let icloudDefaults = NSUbiquitousKeyValueStore.default
 	
 	var entry: JournalEntrySwiftData?
@@ -251,7 +253,7 @@ struct JournalEntryView: View {
 		progress = 0.1
 		Task {
 			if let alreadyWrittenEntry = entry {
-				let result = await viewModel.process(entry: alreadyWrittenEntry)
+				let result = await databaseInteractor.processEntry(entry: alreadyWrittenEntry)
 				self.journalResponse = result.responseToBodyByAI ?? ""
 			} else {
 				let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
@@ -259,7 +261,7 @@ struct JournalEntryView: View {
 				try? context.save()
 				print(newEntrySwiftData)
 				
-				let result = await viewModel.process(entry: newEntrySwiftData)
+				let result = await databaseInteractor.processEntry(entry: newEntrySwiftData)
 				self.journalResponse = result.responseToBodyByAI ?? ""
 				icloudDefaults.removeObject(forKey: "draft")
 				print("ID of new swift data journal entry: \(newEntrySwiftData.id)")

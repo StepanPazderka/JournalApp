@@ -23,9 +23,9 @@ final class JournalAppTests: XCTestCase {
         let databaseInteractor = DatabaseInteractor(modelContainer: modelContainer)
         await databaseInteractor.keepLatest3TextIdeas()
         
-        let ideas = try! await modelContainer.mainContext.fetch(FetchDescriptor<TextIdeaSwiftData>())
-        print("Ideas count: \(ideas.count)")
-        assert(ideas.count == 3)
+        let ideas = try? await modelContainer.mainContext.fetch(FetchDescriptor<TextIdeaSwiftData>())
+        print("Ideas count: \(ideas!.count)")
+        assert(ideas!.count == 3)
     }
 
     func testPerformanceExample() throws {

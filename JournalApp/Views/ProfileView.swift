@@ -40,5 +40,5 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
-        .modelContainer(DatabaseInteractorMock.mockContainer())
+		.modelContainer(DatabaseInteractorMock.mockContainer())
 }

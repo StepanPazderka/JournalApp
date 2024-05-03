@@ -10,11 +10,11 @@ import SwiftData
 
 enum DatabaseInteractorError: Error {
     case cantLoadObjects
-    case unknown
+	case unknown(description: String)
 }
 
 @ModelActor
-actor DatabaseInteractor {
+actor DatabaseInteractor: ObservableObject {
     let networkInteractor: any NetworkInteractor = NetworkInteractorImpl()
         
     func loadUserProfile() async -> String {
@@ -30,6 +30,11 @@ actor DatabaseInteractor {
         
         return ""
     }
+	
+	func loadUserProfileReturnTask() -> Result<ProfileSwiftData, DatabaseInteractorError> {
+		guard let profileObject = try? modelContext.fetch(FetchDescriptor<ProfileSwiftData>()).first else { return .failure(.cantLoadObjects) }
+		return .success(profileObject)
+	}
     
     func keepLatest3TextIdeas() async {
         let ideas = try? modelContext.fetch(FetchDescriptor<TextIdeaSwiftData>(sortBy: [SortDescriptor(\TextIdeaSwiftData.date)]))
@@ -37,11 +42,7 @@ actor DatabaseInteractor {
         guard let ideas else { return }
         
         let ideasToRemove = ideas.enumerated().compactMap { index, idea in
-            if index > 2 {
-                return idea
-            } else {
-                return nil
-            }
+			index > 2 ? idea : nil
         }
         
         for idea in ideasToRemove {
