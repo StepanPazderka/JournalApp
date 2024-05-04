@@ -79,6 +79,14 @@ struct JournalListView: View {
                             Label("Delete", systemImage: "trash")
                         }
                     } else {
+						Button(role: .destructive) {
+							context.delete(entry)
+							if deletedJournalEntriesSwiftData.isEmpty {
+								showingDeletedPosts = false
+							}
+						} label: {
+							Label("Delete", systemImage: "trash")
+						}
                         Button {
                             entry.archived = false
                             if archivedPostsBarHeight == 0 {

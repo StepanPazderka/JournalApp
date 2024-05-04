@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F12B9B92BCC39E0006B7F68 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F12B9B82BCC39E0006B7F68 /* DateFormatter.swift */; };
-		7F1ADD482BE58E9D00E7CA42 /* api.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7F1ADD472BE58E9D00E7CA42 /* api.txt */; };
 		7F1ADD4A2BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ADD492BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift */; };
+		7F1ADD4C2BE5B8FC00E7CA42 /* api.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7F1ADD4B2BE5B8FC00E7CA42 /* api.txt */; };
 		7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */; };
 		7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
@@ -60,8 +60,8 @@
 		7F0A2CF32B306CF800FA692E /* JournalApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JournalApp.entitlements; sourceTree = "<group>"; };
 		7F0A2CF42B3079ED00FA692E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7F12B9B82BCC39E0006B7F68 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		7F1ADD472BE58E9D00E7CA42 /* api.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = api.txt; sourceTree = "<group>"; };
 		7F1ADD492BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFirstLineOfTextfile.swift; sourceTree = "<group>"; };
+		7F1ADD4B2BE5B8FC00E7CA42 /* api.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = api.txt; sourceTree = "<group>"; };
 		7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTests.swift; sourceTree = "<group>"; };
 		7F44EDE62B1FC60600A50C58 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		7FF316772B19343B008BA33B = {
 			isa = PBXGroup;
 			children = (
-				7F1ADD472BE58E9D00E7CA42 /* api.txt */,
+				7F1ADD4B2BE5B8FC00E7CA42 /* api.txt */,
 				7FF316822B19343B008BA33B /* JournalApp */,
 				7F2C2F102B9755AE00F9D020 /* JournalAppTests */,
 				7FF316812B19343B008BA33B /* Products */,
@@ -320,7 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F1ADD482BE58E9D00E7CA42 /* api.txt in Resources */,
+				7F1ADD4C2BE5B8FC00E7CA42 /* api.txt in Resources */,
 				7FF3168B2B19343C008BA33B /* Preview Assets.xcassets in Resources */,
 				7FF316882B19343C008BA33B /* Assets.xcassets in Resources */,
 			);
