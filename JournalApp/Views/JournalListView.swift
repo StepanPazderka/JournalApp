@@ -17,18 +17,18 @@ struct JournalListView: View {
     
     @Query(filter: #Predicate<JournalEntrySwiftData> { journalEntry in
         return (journalEntry.archived ?? false)
-    }, sort: \JournalEntrySwiftData.date, order: .reverse) var deletedJournalEntriesSwiftData: [JournalEntrySwiftData]
+    }, sort: \JournalEntrySwiftData.date, order: .reverse) var archivedJournalEntriesSwiftData: [JournalEntrySwiftData]
     
     var entriesForView: [JournalEntrySwiftData] {
-        if showingDeletedPosts {
-            return deletedJournalEntriesSwiftData
+        if showingArchivedPosts {
+            return archivedJournalEntriesSwiftData
         } else {
             return journalEntriesSwiftData
         }
     }
     
     @State var showingRenameDialog = false
-    @State var showingDeletedPosts = false
+    @State var showingArchivedPosts = false
     
     @State private var showingAddNewJournalEntry = false
     
@@ -36,7 +36,7 @@ struct JournalListView: View {
     
     @State private var showingDeletedPostsBar = false
     private var archivedPostsBarHeight: CGFloat {
-        deletedJournalEntriesSwiftData.isEmpty ? 0.0 : 50.0
+        archivedJournalEntriesSwiftData.isEmpty ? 0.0 : 50.0
     }
     
 	@State private var journalEntryForRenaming: JournalEntrySwiftData?
@@ -72,17 +72,17 @@ struct JournalListView: View {
                     }
                 }
                 .swipeActions(edge: .trailing) {
-                    if !showingDeletedPosts {
-                        Button(role: .destructive) {
+                    if !showingArchivedPosts {
+                        Button {
                             entry.archived = true
                         } label: {
-                            Label("Delete", systemImage: "trash")
+                            Label("Delete", systemImage: "archivebox.fill")
                         }
                     } else {
 						Button(role: .destructive) {
 							context.delete(entry)
-							if deletedJournalEntriesSwiftData.isEmpty {
-								showingDeletedPosts = false
+							if archivedJournalEntriesSwiftData.isEmpty {
+								showingArchivedPosts = false
 							}
 						} label: {
 							Label("Delete", systemImage: "trash")
@@ -90,7 +90,7 @@ struct JournalListView: View {
                         Button {
                             entry.archived = false
                             if archivedPostsBarHeight == 0 {
-                                showingDeletedPosts = false
+                                showingArchivedPosts = false
                             }
                         } label: {
                             Label("Revert", systemImage: "arrow.uturn.backward")
@@ -98,17 +98,17 @@ struct JournalListView: View {
                     }
                 }
             }
-            .onChange(of: showingDeletedPosts, { oldValue, newValue in
+            .onChange(of: showingArchivedPosts, { oldValue, newValue in
                 showingDeletedPostsBar = newValue
             })
-            .navigationTitle(showingDeletedPosts ? "Deleted posts" : "Journal")
+            .navigationTitle(showingArchivedPosts ? "Deleted posts" : "Journal")
             .sheet(isPresented: $showingAddNewJournalEntry, content: {
                 JournalEntryView()
             })
             .overlay {
                 if entriesForView.isEmpty {
                     VStack {
-                        if showingDeletedPosts {
+                        if showingArchivedPosts {
                             Text("No deleted entries")
                         } else {
                             Text("No journal entries")
@@ -118,7 +118,7 @@ struct JournalListView: View {
                 }
             }
             .onAppear {
-                if !deletedJournalEntriesSwiftData.isEmpty {
+                if !archivedJournalEntriesSwiftData.isEmpty {
                     withAnimation {
                         showingDeletedPostsBar = true
                     }
@@ -127,10 +127,10 @@ struct JournalListView: View {
             }
             .overlay(alignment: .bottom) {
                 Button {
-                    showingDeletedPosts.toggle()
+                    showingArchivedPosts.toggle()
                 } label: {
                     HStack {
-                        if !showingDeletedPosts {
+                        if !showingArchivedPosts {
                             Image(systemName: "trash")
                             Text("Deleted posts")
                         } else {
@@ -142,7 +142,7 @@ struct JournalListView: View {
                 }
                 .frame(height: archivedPostsBarHeight)
                 .animation(.easeInOut(duration: 0.5), value: archivedPostsBarHeight)
-                .opacity(!deletedJournalEntriesSwiftData.isEmpty || showingDeletedPosts ? 1 : 0)
+                .opacity(!archivedJournalEntriesSwiftData.isEmpty || showingArchivedPosts ? 1 : 0)
             }
             .navigationDestination(for: JournalEntrySwiftData.self) { entry in
                 JournalEntryView(entry: entry)
