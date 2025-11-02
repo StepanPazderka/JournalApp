@@ -8,10 +8,8 @@
 import Foundation
 import OpenAI
 
-protocol NetworkInteractor {
-    associatedtype implementingClass
-    
-    static var shared: implementingClass { get }
+protocol NetworkInteractor {    
+    static var shared: Self { get }
     
     func getAIoutput(instruction: String, model: Model) async -> Result<String, Error>
 }

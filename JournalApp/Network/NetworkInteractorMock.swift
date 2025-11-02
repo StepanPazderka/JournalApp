@@ -8,7 +8,7 @@
 import Foundation
 import OpenAI
 
-class NetworkInteractorMock: NetworkInteractor {
+final class NetworkInteractorMock: NetworkInteractor {
     static var shared = NetworkInteractorMock()
     
     func getAIoutput(instruction: String, model: Model) async -> Result<String, Error> {

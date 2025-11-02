@@ -38,7 +38,13 @@ final class JournalEntryViewModelImpl: JournalViewModel {
     }
     
     func process(entry: JournalEntrySwiftData) async -> JournalEntrySwiftData {
-        return await databaseInteractor.processEntry(entry: entry)
+		do {
+			return try await databaseInteractor.processEntry(entry: entry)
+		} catch {
+			alertMessage = error.localizedDescription
+			showingAlert = true
+			return entry
+		}
     }
     
     func setup(context: ModelContext) {

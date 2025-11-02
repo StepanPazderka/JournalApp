@@ -62,7 +62,7 @@ actor DatabaseInteractor: ObservableObject {
         }
     }
     
-    func processEntry(entry: JournalEntrySwiftData) async -> JournalEntrySwiftData {
+    func processEntry(entry: JournalEntrySwiftData) async throws -> JournalEntrySwiftData {
         let profile = await self.loadUserProfile()
         var profileInstruction: String?
         
@@ -78,8 +78,8 @@ actor DatabaseInteractor: ObservableObject {
 			if modelContext.hasChanges {
 				try? modelContext.save()
 			}
-        case .failure(_):
-            break
+        case .failure(let error):
+			throw error
         }
         
         // MARK: - Analyzing title
@@ -92,8 +92,8 @@ actor DatabaseInteractor: ObservableObject {
 			if modelContext.hasChanges {
 				try? modelContext.save()
 			}
-        case .failure(_):
-            break
+        case .failure(let error):
+			throw error
         }
         
         // MARK: - Analyzing profile
@@ -110,8 +110,8 @@ actor DatabaseInteractor: ObservableObject {
             switch await result {
             case .success(let output):
                 await self.updateProfile(updatedProfile: output)
-            case .failure(_):
-                break
+            case .failure(let error):
+                throw error
             }
         }
         
@@ -123,10 +123,11 @@ actor DatabaseInteractor: ObservableObject {
         case .success(let output):
             let newTextIdea = TextIdeaSwiftData(body: output)
 			modelContext.insert(newTextIdea)
-        case .failure(_):
-            break
+        case .failure(let error):
+            throw error
         }
                 
         return entry
     }
 }
+

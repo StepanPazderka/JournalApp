@@ -252,22 +252,27 @@ struct JournalEntryView: View {
 		textEditorDisabled = true
 		progress = 0.1
 		Task {
-			if let alreadyWrittenEntry = entry {
-				let result = await databaseInteractor.processEntry(entry: alreadyWrittenEntry)
-				self.journalResponse = result.responseToBodyByAI ?? ""
-			} else {
-				let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
-				context.insert(newEntrySwiftData)
-				try? context.save()
-				print(newEntrySwiftData)
-				
-				let result = await databaseInteractor.processEntry(entry: newEntrySwiftData)
-				self.journalResponse = result.responseToBodyByAI ?? ""
-				icloudDefaults.removeObject(forKey: "draft")
-				print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
+			do {
+				if let alreadyWrittenEntry = entry {
+					let result = try await databaseInteractor.processEntry(entry: alreadyWrittenEntry)
+					self.journalResponse = result.responseToBodyByAI ?? ""
+				} else {
+					let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
+					context.insert(newEntrySwiftData)
+					try? context.save()
+					print(newEntrySwiftData)
+					
+					let result = try await databaseInteractor.processEntry(entry: newEntrySwiftData)
+					self.journalResponse = result.responseToBodyByAI ?? ""
+					icloudDefaults.removeObject(forKey: "draft")
+					print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
+				}
+			} catch {
+				viewModel.alertMessage = error.localizedDescription
+				viewModel.showingAlert = true
 			}
+			progress = 1.0
 		}
-		progress = 1.0
 	}
 }
 //
@@ -279,3 +284,4 @@ struct JournalEntryView: View {
 //#Preview {
 //    JournalEntryView()
 //}
+
