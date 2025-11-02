@@ -9,24 +9,23 @@ import SwiftUI
 
 struct MainTabView: View {
     @State var showingNewJournalEntry = false
-    @State var selectedTab: ViewType = .journal
-    
-    @State var previouslySelectedTab: ViewType = .journal
+    @State var selectedTab: Section = .journal
+    @State var previouslySelectedTab: Section = .journal
     
     var body: some View {
         TabView(selection: $selectedTab) {
             JournalListView()
                 .tabItem { Label("Journal", systemImage: "list.dash") }
-                .tag(ViewType.journal)
+                .tag(Section.journal)
             EmptyView()
                 .tabItem { Label("New Entry", systemImage: "plus")}
                 .sheet(isPresented: $showingNewJournalEntry) {
                     JournalEntryView()
                 }
-                .tag(ViewType.entry)
+                .tag(Section.entry)
             ProfileView()
                 .tabItem { Label("Profile", systemImage: "person.fill") }
-                .tag(ViewType.journal)
+                .tag(Section.journal)
         }
         .onChange(of: selectedTab) { oldValue, newValue in
             if newValue == .entry {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ViewType: String, CaseIterable {
+enum Section: String, CaseIterable {
     case journal
     case entry
     case profile

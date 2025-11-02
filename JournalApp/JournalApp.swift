@@ -7,7 +7,9 @@
 
 import SwiftUI
 import SwiftData
+#if !os(macOS)
 import IQKeyboardManagerSwift
+#endif
 
 @main
 struct JournalApp: SwiftUI.App {
@@ -25,7 +27,9 @@ struct JournalApp: SwiftUI.App {
         WindowGroup {
             MainTabView()
                 .onAppear {
+#if !os(macOS)
                     IQKeyboardManager.shared.enable = true
+#endif
                 }
         }
         .modelContainer(container)

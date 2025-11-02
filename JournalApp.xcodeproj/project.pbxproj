@@ -31,6 +31,35 @@
 		7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
 		7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
 		7FA205EA2B9DFDEF00DCCBF5 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
+		7FB778EF2EB7D493005FE797 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
+		7FB778F02EB7D493005FE797 /* JournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316852B19343B008BA33B /* JournalEntryView.swift */; };
+		7FB778F12EB7D493005FE797 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44EDE62B1FC60600A50C58 /* ProfileView.swift */; };
+		7FB778F22EB7D493005FE797 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
+		7FB778F32EB7D493005FE797 /* String+truncated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D08482B87894200F4F47F /* String+truncated.swift */; };
+		7FB778F42EB7D493005FE797 /* JournalEntryViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2F2B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift */; };
+		7FB778F52EB7D493005FE797 /* ReadFirstLineOfTextfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1ADD492BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift */; };
+		7FB778F62EB7D493005FE797 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
+		7FB778F72EB7D493005FE797 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F12B9B82BCC39E0006B7F68 /* DateFormatter.swift */; };
+		7FB778F82EB7D493005FE797 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB332B1A04500016E8A7 /* JournalListView.swift */; };
+		7FB778F92EB7D493005FE797 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
+		7FB778FA2EB7D493005FE797 /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
+		7FB778FB2EB7D493005FE797 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
+		7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
+		7FB778FD2EB7D493005FE797 /* View+hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD19FC92B1DB51800D97901 /* View+hidden.swift */; };
+		7FB778FE2EB7D493005FE797 /* NetworkInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */; };
+		7FB778FF2EB7D493005FE797 /* ModelContext+existingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */; };
+		7FB779002EB7D493005FE797 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
+		7FB779012EB7D493005FE797 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD438CB2BBB8FD500DB31F0 /* ViewType.swift */; };
+		7FB779022EB7D493005FE797 /* JournalEntryViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */; };
+		7FB779032EB7D493005FE797 /* JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF316832B19343B008BA33B /* JournalApp.swift */; };
+		7FB779042EB7D493005FE797 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
+		7FB779052EB7D493005FE797 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF3BF6C2BB9B2BA006B4953 /* EmptyView.swift */; };
+		7FB779062EB7D493005FE797 /* JournalEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */; };
+		7FB779082EB7D493005FE797 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB778EA2EB7D493005FE797 /* KeychainSwift */; };
+		7FB779092EB7D493005FE797 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB778E82EB7D493005FE797 /* OpenAI */; };
+		7FB7790C2EB7D493005FE797 /* api.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7F1ADD4B2BE5B8FC00E7CA42 /* api.txt */; };
+		7FB7790D2EB7D493005FE797 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF3168A2B19343C008BA33B /* Preview Assets.xcassets */; };
+		7FB7790E2EB7D493005FE797 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF316872B19343C008BA33B /* Assets.xcassets */; };
 		7FC0E7942B265729002EDB73 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC0E7932B265729002EDB73 /* KeychainSwift */; };
 		7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
 		7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
@@ -77,6 +106,8 @@
 		7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorImpl.swift; sourceTree = "<group>"; };
 		7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSectionModel.swift; sourceTree = "<group>"; };
+		7FB779122EB7D493005FE797 /* JournalAppMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalAppMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FB779132EB7D493005FE797 /* JournalApp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JournalApp copy-Info.plist"; path = "/Users/stepanpazderka/Developer/JournalApp/JournalApp copy-Info.plist"; sourceTree = "<absolute>"; };
 		7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+transformToSentence.swift"; sourceTree = "<group>"; };
 		7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseObjectsCloudKit.swift; sourceTree = "<group>"; };
 		7FD19FC92B1DB51800D97901 /* View+hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+hidden.swift"; sourceTree = "<group>"; };
@@ -96,6 +127,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FB779072EB7D493005FE797 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FB779082EB7D493005FE797 /* KeychainSwift in Frameworks */,
+				7FB779092EB7D493005FE797 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +177,6 @@
 		7F6EAE7F2B2A9C6800E97084 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7F6EAE812B2A9C8300E97084 /* Network */,
-				7F6EAE802B2A9C7100E97084 /* Database */,
 				7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */,
 			);
 			path = Models;
@@ -181,6 +219,7 @@
 				7F1ADD4B2BE5B8FC00E7CA42 /* api.txt */,
 				7FF316822B19343B008BA33B /* JournalApp */,
 				7F2C2F102B9755AE00F9D020 /* JournalAppTests */,
+				7FB779132EB7D493005FE797 /* JournalApp copy-Info.plist */,
 				7FF316812B19343B008BA33B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -190,6 +229,7 @@
 			children = (
 				7FF316802B19343B008BA33B /* JournalApp.app */,
 				7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */,
+				7FB779122EB7D493005FE797 /* JournalAppMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,6 +242,8 @@
 				7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */,
 				7F0A2CF42B3079ED00FA692E /* Info.plist */,
 				7F0A2CF32B306CF800FA692E /* JournalApp.entitlements */,
+				7F6EAE812B2A9C8300E97084 /* Network */,
+				7F6EAE802B2A9C7100E97084 /* Database */,
 				7F6EAE7F2B2A9C6800E97084 /* Models */,
 				7F69EB3A2B1A09030016E8A7 /* Utilities */,
 				7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */,
@@ -242,6 +284,27 @@
 			productName = JournalAppTests;
 			productReference = 7F2C2F0F2B9755AE00F9D020 /* JournalAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7FB778E72EB7D493005FE797 /* JournalAppMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FB7790F2EB7D493005FE797 /* Build configuration list for PBXNativeTarget "JournalAppMac" */;
+			buildPhases = (
+				7FB778EE2EB7D493005FE797 /* Sources */,
+				7FB779072EB7D493005FE797 /* Frameworks */,
+				7FB7790B2EB7D493005FE797 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JournalAppMac;
+			packageProductDependencies = (
+				7FB778E82EB7D493005FE797 /* OpenAI */,
+				7FB778EA2EB7D493005FE797 /* KeychainSwift */,
+			);
+			productName = JournalApp;
+			productReference = 7FB779122EB7D493005FE797 /* JournalAppMac.app */;
+			productType = "com.apple.product-type.application";
 		};
 		7FF3167F2B19343B008BA33B /* JournalApp */ = {
 			isa = PBXNativeTarget;
@@ -304,6 +367,7 @@
 			targets = (
 				7FF3167F2B19343B008BA33B /* JournalApp */,
 				7F2C2F0E2B9755AE00F9D020 /* JournalAppTests */,
+				7FB778E72EB7D493005FE797 /* JournalAppMac */,
 			);
 		};
 /* End PBXProject section */
@@ -313,6 +377,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FB7790B2EB7D493005FE797 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FB7790C2EB7D493005FE797 /* api.txt in Resources */,
+				7FB7790D2EB7D493005FE797 /* Preview Assets.xcassets in Resources */,
+				7FB7790E2EB7D493005FE797 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +414,37 @@
 				7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */,
 				7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */,
 				7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FB778EE2EB7D493005FE797 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FB778EF2EB7D493005FE797 /* SidebarSectionModel.swift in Sources */,
+				7FB778F02EB7D493005FE797 /* JournalEntryView.swift in Sources */,
+				7FB778F12EB7D493005FE797 /* ProfileView.swift in Sources */,
+				7FB778F22EB7D493005FE797 /* DatabaseInteractor.swift in Sources */,
+				7FB778F32EB7D493005FE797 /* String+truncated.swift in Sources */,
+				7FB778F42EB7D493005FE797 /* JournalEntryViewModelMock.swift in Sources */,
+				7FB778F52EB7D493005FE797 /* ReadFirstLineOfTextfile.swift in Sources */,
+				7FB778F62EB7D493005FE797 /* MainTabView.swift in Sources */,
+				7FB778F72EB7D493005FE797 /* DateFormatter.swift in Sources */,
+				7FB778F82EB7D493005FE797 /* JournalListView.swift in Sources */,
+				7FB778F92EB7D493005FE797 /* NetworkInteractorImpl.swift in Sources */,
+				7FB778FA2EB7D493005FE797 /* DatabaseObjectsCloudKit.swift in Sources */,
+				7FB778FB2EB7D493005FE797 /* String+cleanedUp.swift in Sources */,
+				7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */,
+				7FB778FD2EB7D493005FE797 /* View+hidden.swift in Sources */,
+				7FB778FE2EB7D493005FE797 /* NetworkInteractorMock.swift in Sources */,
+				7FB778FF2EB7D493005FE797 /* ModelContext+existingModel.swift in Sources */,
+				7FB779002EB7D493005FE797 /* String+transformToSentence.swift in Sources */,
+				7FB779012EB7D493005FE797 /* ViewType.swift in Sources */,
+				7FB779022EB7D493005FE797 /* JournalEntryViewModelImpl.swift in Sources */,
+				7FB779032EB7D493005FE797 /* JournalApp.swift in Sources */,
+				7FB779042EB7D493005FE797 /* NetworkInteractor.swift in Sources */,
+				7FB779052EB7D493005FE797 /* EmptyView.swift in Sources */,
+				7FB779062EB7D493005FE797 /* JournalEntryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +525,78 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JournalApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JournalApp";
+			};
+			name = Release;
+		};
+		7FB779102EB7D493005FE797 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JournalApp/JournalApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"JournalApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 3HV23S92WL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JournalApp copy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Lumi;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7FB779112EB7D493005FE797 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JournalApp/JournalApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"JournalApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 3HV23S92WL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JournalApp copy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Lumi;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -547,6 +724,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = JournalApp/JournalApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -556,6 +734,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JournalApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lumi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -568,7 +747,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -582,6 +761,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = JournalApp/JournalApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -591,6 +771,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JournalApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lumi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -603,7 +784,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -620,6 +801,15 @@
 			buildConfigurations = (
 				7F2C2F152B9755AE00F9D020 /* Debug */,
 				7F2C2F162B9755AE00F9D020 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7FB7790F2EB7D493005FE797 /* Build configuration list for PBXNativeTarget "JournalAppMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FB779102EB7D493005FE797 /* Debug */,
+				7FB779112EB7D493005FE797 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -653,6 +843,22 @@
 				minimumVersion = 0.2.5;
 			};
 		};
+		7FB778E92EB7D493005FE797 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.5;
+			};
+		};
+		7FB778EB2EB7D493005FE797 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 		7FC0E7922B265729002EDB73 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -676,6 +882,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F69EB282B19764F0016E8A7 /* XCRemoteSwiftPackageReference "OpenAI" */;
 			productName = OpenAI;
+		};
+		7FB778E82EB7D493005FE797 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB778E92EB7D493005FE797 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		7FB778EA2EB7D493005FE797 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FB778EB2EB7D493005FE797 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		7FC0E7932B265729002EDB73 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
