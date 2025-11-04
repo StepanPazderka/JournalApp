@@ -15,7 +15,7 @@ enum DatabaseInteractorError: Error {
 
 @ModelActor
 actor DatabaseInteractor: ObservableObject {
-    let networkInteractor: any NetworkInteractor = NetworkInteractorImpl()
+    let networkInteractor: any NetworkInteractor = AppleFMNetworkInteractor.shared
         
     func loadUserProfile() async -> String {
         do {
@@ -71,7 +71,7 @@ actor DatabaseInteractor: ObservableObject {
         
         let bodyAnlysisInstruction_second = "Analyze the user's text journal entry: \(entry.body) in conjunction with their profile: \(profile), which summarizes key personal attributes, preferences, life circumstances, and any specific challenges or goals they have shared. Identify the primary themes, emotions, and specific situations described in the journal entry. Craft empathetic, constructive, and highly personalized advice that not only addresses the content of the entry but also aligns with the broader context of the user's life as outlined in their profile. Offer strategies for coping, personal growth, and problem-solving that are tailored to the user's unique journey, emphasizing progress, self-care, and the value of professional support when needed. Celebrate any achievements or positive developments noted, and encourage continued reflection and proactive steps towards their goals. Write entire output friendly, as a advice to a friend, if you know users name, use it, otherwise just try to be friendly."
         
-        async let bodyAnalysisResult = await networkInteractor.getAIoutput(instruction: bodyAnlysisInstruction_second, model: .gpt4)
+        async let bodyAnalysisResult = await networkInteractor.getAIoutput(instruction: bodyAnlysisInstruction_second, modelIdentifier: "foundation-transformer")
         switch await bodyAnalysisResult {
         case .success(let output):
             entry.responseToBodyByAI = output
@@ -85,7 +85,7 @@ actor DatabaseInteractor: ObservableObject {
         // MARK: - Analyzing title
 		let TitleInstruction = "Create a title for this text: \(String(describing: entry.body)) and ONLY send back a title, nothing else. Try to make that title about 5 words. Write it as one single sentence and dont be too romantic. Dont use special characters. Just output title text."
         
-        async let TitleInstructionResult = await networkInteractor.getAIoutput(instruction: TitleInstruction, model: .gpt3_5Turbo_16k)
+        async let TitleInstructionResult = await networkInteractor.getAIoutput(instruction: TitleInstruction, modelIdentifier: "foundation-transformer")
         switch await TitleInstructionResult {
         case .success(let output):
             entry.name = output
@@ -106,7 +106,7 @@ actor DatabaseInteractor: ObservableObject {
         }
         
         if let profileInstruction {
-            async let result = await networkInteractor.getAIoutput(instruction: profileInstruction, model: .gpt3_5Turbo_16k)
+            async let result = await networkInteractor.getAIoutput(instruction: profileInstruction, modelIdentifier: "foundation-transformer")
             switch await result {
             case .success(let output):
                 await self.updateProfile(updatedProfile: output)
@@ -118,7 +118,7 @@ actor DatabaseInteractor: ObservableObject {
         // MARK: - Generating new idea
         let newTextIdeaInstruction = "Based on new updated profile about your patient, generate a new short text prompt for new journal entry that will help him and you understand user better. Try to by nice and friendly, try to suggest something that would help him to live a better life or help you understand him better. Instructions that needs to be obeyed by ChatGPT: By short! Only respond with text prompt itself, no other text! Be friendly! Try to be motivational and optimistic!"
         
-        async let newTextIdeaResult = await networkInteractor.getAIoutput(instruction: newTextIdeaInstruction, model: .gpt3_5Turbo_16k)
+        async let newTextIdeaResult = await networkInteractor.getAIoutput(instruction: newTextIdeaInstruction, modelIdentifier: "foundation-transformer")
         switch await newTextIdeaResult {
         case .success(let output):
             let newTextIdea = TextIdeaSwiftData(body: output)

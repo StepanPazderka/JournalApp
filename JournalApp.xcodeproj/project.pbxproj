@@ -29,6 +29,9 @@
 		7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
 		7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
+		7F94C0622EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
+		7F94C0632EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
+		7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
 		7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
 		7FA205EA2B9DFDEF00DCCBF5 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
 		7FB778EF2EB7D493005FE797 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
@@ -104,6 +107,7 @@
 		7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorImpl.swift; sourceTree = "<group>"; };
+		7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleFMNetworkInteractor.swift; sourceTree = "<group>"; };
 		7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSectionModel.swift; sourceTree = "<group>"; };
 		7FB779122EB7D493005FE797 /* JournalAppMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalAppMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +202,7 @@
 				7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */,
 				7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */,
 				7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */,
+				7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				7F2C2F1B2B975BD100F9D020 /* NetworkInteractorImpl.swift in Sources */,
 				7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */,
 				7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */,
+				7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */,
 				7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */,
 				7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */,
 				7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */,
@@ -443,6 +449,7 @@
 				7FB779022EB7D493005FE797 /* JournalEntryViewModelImpl.swift in Sources */,
 				7FB779032EB7D493005FE797 /* JournalApp.swift in Sources */,
 				7FB779042EB7D493005FE797 /* NetworkInteractor.swift in Sources */,
+				7F94C0622EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */,
 				7FB779052EB7D493005FE797 /* EmptyView.swift in Sources */,
 				7FB779062EB7D493005FE797 /* JournalEntryViewModel.swift in Sources */,
 			);
@@ -474,6 +481,7 @@
 				7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */,
 				7FF316842B19343B008BA33B /* JournalApp.swift in Sources */,
 				7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */,
+				7F94C0632EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */,
 				7FF3BF6D2BB9B2BA006B4953 /* EmptyView.swift in Sources */,
 				7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */,
 			);
@@ -552,6 +560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -588,6 +597,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -740,6 +750,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -777,6 +788,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

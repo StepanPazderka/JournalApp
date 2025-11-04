@@ -6,21 +6,16 @@
 //
 
 import Foundation
-import OpenAI
 
 final class NetworkInteractorMock: NetworkInteractor {
     static var shared = NetworkInteractorMock()
     
-    func getAIoutput(instruction: String, model: Model) async -> Result<String, Error> {
-        let chat = Chat(role: .assistant, content: instruction, name: "Lumi")
-        let chatQuery = ChatQuery(model: model, messages: [chat])
-
+    func getAIoutput(instruction: String, modelIdentifier: String) async -> Result<String, Error> {
         do {
             try await Task.sleep(nanoseconds: 1_000_000_000)
-            let output = "Just some generic text output"
-            return .success(output.cleaned().replacingSmileysWithEmojis().cleanString())
+            let output = "[Mock FM] " + instruction
+            return .success(output)
         } catch {
-            print(error.localizedDescription)
             return .failure(error)
         }
     }
