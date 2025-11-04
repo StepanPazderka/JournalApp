@@ -48,85 +48,119 @@ actor DatabaseInteractor: ObservableObject {
         for idea in ideasToRemove {
 			modelContext.delete(idea)
         }
+        do { try modelContext.save() } catch { }
     }
     
     func updateProfile(updatedProfile: String) async {
         let fetchedProfileObjects = try? modelContext.fetch(FetchDescriptor<ProfileSwiftData>())
-        
         if let profileFetched = fetchedProfileObjects?.first {
             profileFetched.profile = updatedProfile
-            modelContext.insert(profileFetched)
         } else {
             let newProfile = ProfileSwiftData(name: "", profile: updatedProfile)
             modelContext.insert(newProfile)
         }
+        do {
+            try modelContext.save()
+        } catch {
+            // Handle or log the save error if desired
+        }
     }
     
     func processEntry(entry: JournalEntrySwiftData) async throws -> JournalEntrySwiftData {
+        // Load existing profile and unwrap body safely to avoid Optional(...) in prompts
         let profile = await self.loadUserProfile()
-        var profileInstruction: String?
-        
-        // MARK: - Analyzing body of journal entry
-        let bodyAnalysisInstruction = "Instructions for ChatGPT: Your name is Lumi, Dont ever say you are ChatGPT. You are therapist and a life coach inside Journaling app on iOS. Your friend has this personality and backstory: \(profile). But don't mention those details with him. Just be mindful of those when providing advice. You are reading a text from a friend. He wrote you this text: \(String(describing: entry.body)). DO NOT RECOMMEND THERAPIST, BECAUSE YOU ARE THERAPIST. PROVIDE ONE AND ONLY ONE INSIGHTFUL QUESTIONS THAT WOULD HELP HIM SEE THINGS FROM DIFFERENT PERSPECTIVE, HE DIDNT CONSIDERED BEFORE. Say nothing else. Dont greet him. Write entire response as a advice to a friend, in a friendly tone. While you are taking into account his profile, try to react to actual text he just wrote. Try to be useful, helpful, insightful, offer new perspectives, maybe joke (not necessarily) but try to write two paragraphs."
-        
-        let bodyAnlysisInstruction_second = "Analyze the user's text journal entry: \(entry.body) in conjunction with their profile: \(profile), which summarizes key personal attributes, preferences, life circumstances, and any specific challenges or goals they have shared. Identify the primary themes, emotions, and specific situations described in the journal entry. Craft empathetic, constructive, and highly personalized advice that not only addresses the content of the entry but also aligns with the broader context of the user's life as outlined in their profile. Offer strategies for coping, personal growth, and problem-solving that are tailored to the user's unique journey, emphasizing progress, self-care, and the value of professional support when needed. Celebrate any achievements or positive developments noted, and encourage continued reflection and proactive steps towards their goals. Write entire output friendly, as a advice to a friend, if you know users name, use it, otherwise just try to be friendly."
-        
-        async let bodyAnalysisResult = await networkInteractor.getAIoutput(instruction: bodyAnlysisInstruction_second, modelIdentifier: "foundation-transformer")
-        switch await bodyAnalysisResult {
+        let body = entry.body ?? ""
+
+        // MARK: - Analyze entry and produce a tweaked instruction for the user
+        let analysisInstruction = """
+        You are Lumi, a warm, friendly therapist and life coach inside an iOS journaling app. Read the user's journal entry in the context of their profile and produce:
+        1) A short, empathetic reflection (2–3 sentences) that shows you understood the entry.
+        2) ONE clear, tailored next-step instruction the user can do today to help them reflect or make progress. This should be concrete and actionable (start with a verb). Keep it to one sentence.
+        Output format:
+        Reflection: <your reflection>
+        Instruction: <your single instruction>
+
+        Profile:
+        \(profile)
+
+        Entry:
+        \(body)
+        """
+
+        async let analysisResult = await networkInteractor.getAIoutput(instruction: analysisInstruction, modelIdentifier: "foundation-transformer")
+        switch await analysisResult {
         case .success(let output):
+            // Store the combined reflection + instruction so UI can show both
             entry.responseToBodyByAI = output
-			if modelContext.hasChanges {
-				try? modelContext.save()
-			}
+            do { try modelContext.save() } catch { throw error }
         case .failure(let error):
-			throw error
+            throw error
         }
-        
-        // MARK: - Analyzing title
-		let TitleInstruction = "Create a title for this text: \(String(describing: entry.body)) and ONLY send back a title, nothing else. Try to make that title about 5 words. Write it as one single sentence and dont be too romantic. Dont use special characters. Just output title text."
-        
-        async let TitleInstructionResult = await networkInteractor.getAIoutput(instruction: TitleInstruction, modelIdentifier: "foundation-transformer")
-        switch await TitleInstructionResult {
+
+        // MARK: - Generate concise title from body
+        let titleInstruction = """
+        Create a concise title (about 5 words) for the following text. Output only the title, no quotes or extra text, no special characters.
+
+        Text:
+        \(body)
+        """
+
+        async let titleResult = await networkInteractor.getAIoutput(instruction: titleInstruction, modelIdentifier: "foundation-transformer")
+        switch await titleResult {
         case .success(let output):
             entry.name = output
-			if modelContext.hasChanges {
-				try? modelContext.save()
-			}
+            do { try modelContext.save() } catch { throw error }
         case .failure(let error):
-			throw error
+            throw error
         }
-        
-        // MARK: - Analyzing profile
-        if let body = entry.body {
-            if profile.isEmpty {
-                profileInstruction = "Your name is Lumi, you are a therapist Journal app running on iOS. Take this user written text \(body) and respond back only a profile about what you learned about a person who wrote thise, try to understand issues and problems, pick out characeteristics of long term well being of patient, try to understand personality of user and what to focus on next in order to help him or her live a better life. Dont ever talk about his name or age. Write it like you writing this to the patient, treat him like a friend"
-            } else {
-                profileInstruction = "Your name is Lumi, you are a therapist Journal app running on iOS. Take this user profile: \(profile) and take this user written text \(body) and respond back only new updated profile where you combine these two, pick out characeteristics of long term well being of patient, try to understand issues and problems, try to understand personality of user and what to focus on next. Dont ever talk about his name or age. Write it like you writing this to the patient, treat him like a friend"
-            }
+
+        // MARK: - Update profile based on this entry
+        let profileInstruction: String
+        if profile.isEmpty {
+            profileInstruction = """
+            You are Lumi, a therapist in an iOS journaling app. Based on the user's entry below, write an initial, concise profile of the user that focuses on their personality, challenges, strengths, and areas to focus on next. Do not mention name or age. Write it as if speaking kindly to the user.
+
+            Entry:
+            \(body)
+            """
+        } else {
+            profileInstruction = """
+            You are Lumi, a therapist in an iOS journaling app. Update the user's existing profile below by integrating new insights from the latest entry. Keep it concise and kind, focusing on personality, challenges, strengths, and next focus areas. Do not mention name or age. Write it as if speaking to the user.
+
+            Current Profile:
+            \(profile)
+
+            New Entry:
+            \(body)
+            """
         }
-        
-        if let profileInstruction {
-            async let result = await networkInteractor.getAIoutput(instruction: profileInstruction, modelIdentifier: "foundation-transformer")
-            switch await result {
-            case .success(let output):
-                await self.updateProfile(updatedProfile: output)
-            case .failure(let error):
-                throw error
-            }
+
+        async let updatedProfileResult = await networkInteractor.getAIoutput(instruction: profileInstruction, modelIdentifier: "foundation-transformer")
+        switch await updatedProfileResult {
+        case .success(let output):
+            await self.updateProfile(updatedProfile: output)
+        case .failure(let error):
+            throw error
         }
-        
-        // MARK: - Generating new idea
-        let newTextIdeaInstruction = "Based on new updated profile about your patient, generate a new short text prompt for new journal entry that will help him and you understand user better. Try to by nice and friendly, try to suggest something that would help him to live a better life or help you understand him better. Instructions that needs to be obeyed by ChatGPT: By short! Only respond with text prompt itself, no other text! Be friendly! Try to be motivational and optimistic!"
-        
+
+        // MARK: - Generate a new short prompt idea based on updated profile context
+        let newTextIdeaInstruction = """
+        Based on the user's profile below, generate ONE short, friendly prompt for the next journal entry that helps the user reflect and make progress. Output only the prompt text.
+
+        Profile:
+        \(await self.loadUserProfile())
+        """
+
         async let newTextIdeaResult = await networkInteractor.getAIoutput(instruction: newTextIdeaInstruction, modelIdentifier: "foundation-transformer")
         switch await newTextIdeaResult {
         case .success(let output):
             let newTextIdea = TextIdeaSwiftData(body: output)
-			modelContext.insert(newTextIdea)
+            modelContext.insert(newTextIdea)
+            do { try modelContext.save() } catch { throw error }
         case .failure(let error):
             throw error
         }
-                
+
         return entry
     }
 }
