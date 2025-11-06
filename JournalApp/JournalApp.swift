@@ -12,14 +12,20 @@ import IQKeyboardManagerSwift
 #endif
 
 @main
+@MainActor
 struct JournalApp: SwiftUI.App {
-    let container: ModelContainer = {
-        let storeURL = URL.documentsDirectory.appending(path: "database.sqlite")
-        let schema = Schema([JournalEntrySwiftData.self, ProfileSwiftData.self, TextIdeaSwiftData.self])
-        let configuration = ModelConfiguration(schema: schema, url: storeURL)
-        let container = try! ModelContainer(for: schema, configurations: configuration)
-        return container
-    }()
+    let container: ModelContainer
+    
+    init() {
+        if CommandLine.arguments.contains("--demo-db") {
+            self.container = DatabaseInteractorMock.mockContainer()
+        } else {
+            let storeURL = URL.documentsDirectory.appending(path: "database.sqlite")
+            let schema = Schema([JournalEntrySwiftData.self, ProfileSwiftData.self, TextIdeaSwiftData.self])
+            let configuration = ModelConfiguration(schema: schema, url: storeURL)
+            self.container = try! ModelContainer(for: schema, configurations: configuration)
+        }
+    }
     
     var body: some Scene {
 		let databaseInteractor = DatabaseInteractor(modelContainer: container)

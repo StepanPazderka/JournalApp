@@ -30,6 +30,9 @@
 		7F94C0622EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
 		7F94C0632EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
 		7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
+		7F9FE5DD2EBD07C10000C609 /* AIPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9FE5DC2EBD07BF0000C609 /* AIPrompts.swift */; };
+		7F9FE5DE2EBD07C10000C609 /* AIPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9FE5DC2EBD07BF0000C609 /* AIPrompts.swift */; };
+		7F9FE5DF2EBD1BD70000C609 /* AIPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9FE5DC2EBD07BF0000C609 /* AIPrompts.swift */; };
 		7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
 		7FA205EA2B9DFDEF00DCCBF5 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
 		7FB778EF2EB7D493005FE797 /* SidebarSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */; };
@@ -104,6 +107,7 @@
 		7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractor.swift; sourceTree = "<group>"; };
 		7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleFMNetworkInteractor.swift; sourceTree = "<group>"; };
+		7F9FE5DC2EBD07BF0000C609 /* AIPrompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPrompts.swift; sourceTree = "<group>"; };
 		7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSectionModel.swift; sourceTree = "<group>"; };
 		7FB779122EB7D493005FE797 /* JournalAppMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalAppMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +167,7 @@
 		7F69EB3A2B1A09030016E8A7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7F9FE5DC2EBD07BF0000C609 /* AIPrompts.swift */,
 				7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */,
 				7FD19FC92B1DB51800D97901 /* View+hidden.swift */,
 				7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */,
@@ -411,6 +416,7 @@
 				7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */,
 				7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */,
 				7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */,
+				7F9FE5DF2EBD1BD70000C609 /* AIPrompts.swift in Sources */,
 				7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */,
 				7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */,
 				7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */,
@@ -425,6 +431,7 @@
 				7FB778F02EB7D493005FE797 /* JournalEntryView.swift in Sources */,
 				7FB778F12EB7D493005FE797 /* ProfileView.swift in Sources */,
 				7FB778F22EB7D493005FE797 /* DatabaseInteractor.swift in Sources */,
+				7F9FE5DE2EBD07C10000C609 /* AIPrompts.swift in Sources */,
 				7FB778F32EB7D493005FE797 /* String+truncated.swift in Sources */,
 				7FB778F42EB7D493005FE797 /* JournalEntryViewModelMock.swift in Sources */,
 				7FB778F52EB7D493005FE797 /* ReadFirstLineOfTextfile.swift in Sources */,
@@ -456,6 +463,7 @@
 				7FF316862B19343B008BA33B /* JournalEntryView.swift in Sources */,
 				7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */,
 				7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */,
+				7F9FE5DD2EBD07C10000C609 /* AIPrompts.swift in Sources */,
 				7F4D08492B87894200F4F47F /* String+truncated.swift in Sources */,
 				7F69EB302B1A01BE0016E8A7 /* JournalEntryViewModelMock.swift in Sources */,
 				7F1ADD4A2BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift in Sources */,
@@ -498,7 +506,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3HV23S92WL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,7 +525,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3HV23S92WL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazderka.JournalAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
