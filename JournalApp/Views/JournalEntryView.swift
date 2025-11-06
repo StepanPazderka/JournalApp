@@ -26,6 +26,7 @@ struct JournalEntryView: View {
 	
 	@State private var showNotificationOverBody = false
 	@State private var showNotificationOverResponse = false
+	@State private var notificationTextOverResponse = "Copied into clipboard"
 	
 	@FocusState private var isTextEditorInFocus: Bool
 	
@@ -138,6 +139,7 @@ struct JournalEntryView: View {
 									UIPasteboard.general.string = entry?.responseToBodyByAI
 #endif
 									withAnimation {
+										notificationTextOverResponse = "Copied into clipboard"
 										showNotificationOverResponse = true
 										DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
 											withAnimation {
@@ -153,8 +155,15 @@ struct JournalEntryView: View {
 							.transition(.opacity)
 							.animation(!journalResponse.isEmpty ? nil : .easeIn(duration: 0.3), value: self.journalResponse)
 							.lineLimit(nil)
+							.onTapGesture(count: 3, perform: {
+								// Show quick notification then reanalyze
+								showReanalyzingNotification()
+								Task {
+									await reanalyzeIfPossible()
+								}
+							})
 						if showNotificationOverResponse {
-							Text("Copied into clipboard")
+							Text(notificationTextOverResponse)
 								.padding()
 								.background(Color.blue)
 								.foregroundColor(.white)
@@ -248,30 +257,84 @@ struct JournalEntryView: View {
 		}
 	}
 	
+	// MARK: - New split functions
+	
+	/// Analyze the given entry using the DatabaseInteractor and return the updated entry.
+	func analyzeEntry(_ entry: JournalEntrySwiftData) async throws -> JournalEntrySwiftData {
+		return try await databaseInteractor.processEntry(entry: entry)
+	}
+	
+	/// Create and insert a new entry with current journalBody.
+	/// Returns the created entry.
+	func saveNewEntry() -> JournalEntrySwiftData {
+		let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
+		context.insert(newEntrySwiftData)
+		try? context.save()
+		return newEntrySwiftData
+	}
+	
+	/// Persist any changes to an existing entry if needed.
+	func saveExistingEntry(_ entry: JournalEntrySwiftData) {
+		context.insert(entry)
+		try? context.save()
+	}
+	
+	/// Original coordinator kept for button action; now delegates to the split functions.
 	func saveJournalEntry() {
 		textEditorDisabled = true
 		progress = 0.1
 		Task {
 			do {
+				let targetEntry: JournalEntrySwiftData
 				if let alreadyWrittenEntry = entry {
-					let result = try await databaseInteractor.processEntry(entry: alreadyWrittenEntry)
-					self.journalResponse = result.responseToBodyByAI ?? ""
+					// ensure the latest body is persisted if editing draft-less existing entries
+					if let bodyText = alreadyWrittenEntry.body, !bodyText.isEmpty {
+						saveExistingEntry(alreadyWrittenEntry)
+					}
+					targetEntry = alreadyWrittenEntry
 				} else {
-					let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
-					context.insert(newEntrySwiftData)
-					try? context.save()
-					print(newEntrySwiftData)
-					
-					let result = try await databaseInteractor.processEntry(entry: newEntrySwiftData)
-					self.journalResponse = result.responseToBodyByAI ?? ""
+					targetEntry = saveNewEntry()
+				}
+				
+				let result = try await analyzeEntry(targetEntry)
+				self.journalResponse = result.responseToBodyByAI ?? ""
+				
+				// Clear draft only when we created a new entry
+				if self.entry == nil {
 					icloudDefaults.removeObject(forKey: "draft")
-					print("ID of new swift data journal entry: \(newEntrySwiftData.id)")
 				}
 			} catch {
 				viewModel.alertMessage = error.localizedDescription
 				viewModel.showingAlert = true
 			}
 			progress = 1.0
+		}
+	}
+	
+	/// Example helper you can call from other places (e.g., triple tap on response)
+	func reanalyzeIfPossible() async {
+		guard let entry else { return }
+		progress = 0.1
+		do {
+			let updated = try await analyzeEntry(entry)
+			self.journalResponse = updated.responseToBodyByAI ?? ""
+		} catch {
+			viewModel.alertMessage = error.localizedDescription
+			viewModel.showingAlert = true
+		}
+		progress = 1.0
+	}
+	
+	/// Shows a quick banner over the response with a custom message.
+	private func showReanalyzingNotification() {
+		withAnimation {
+			notificationTextOverResponse = "Reanalyzing…"
+			showNotificationOverResponse = true
+		}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+			withAnimation {
+				showNotificationOverResponse = false
+			}
 		}
 	}
 }
@@ -284,4 +347,3 @@ struct JournalEntryView: View {
 //#Preview {
 //    JournalEntryView()
 //}
-

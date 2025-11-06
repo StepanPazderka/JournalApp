@@ -12,9 +12,7 @@ import SwiftUI
 
 import SwiftData
 
-final class JournalEntryViewModelImpl: JournalViewModel {
-    private var networkInteractor: any NetworkInteractor = NetworkInteractorImpl.shared
-    
+final class JournalEntryViewModelImpl: JournalViewModel {    
     @Published var showingAlert = false
     @Published var alertMessage = ""
     

@@ -8,7 +8,7 @@ final class AppleFMNetworkInteractor: NetworkInteractor {
 
     enum FMError: Error { case emptyOutput }
 
-    func getAIoutput(instruction: String, modelIdentifier: String) async -> Result<String, Error> {
+    func getAIoutput(instruction: String) async -> Result<String, Error> {
         do {
             let prompt = instruction.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !prompt.isEmpty else { return .failure(FMError.emptyOutput) }

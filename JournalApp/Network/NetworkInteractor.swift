@@ -10,5 +10,5 @@ import Foundation
 protocol NetworkInteractor {    
     static var shared: Self { get }
     
-    func getAIoutput(instruction: String, modelIdentifier: String) async -> Result<String, Error>
+    func getAIoutput(instruction: String) async -> Result<String, Error>
 }

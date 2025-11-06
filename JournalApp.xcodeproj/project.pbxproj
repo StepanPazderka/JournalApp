@@ -14,7 +14,6 @@
 		7F2C2F182B9758B800F9D020 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F2C2F192B9758CD00F9D020 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
 		7F2C2F1A2B975BC500F9D020 /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
-		7F2C2F1B2B975BD100F9D020 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
 		7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
 		7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44EDE62B1FC60600A50C58 /* ProfileView.swift */; };
@@ -28,7 +27,6 @@
 		7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB332B1A04500016E8A7 /* JournalListView.swift */; };
 		7F69EB3E2B1A234E0016E8A7 /* DatabaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */; };
 		7F6EAE832B2A9C9000E97084 /* NetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */; };
-		7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
 		7F94C0622EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
 		7F94C0632EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
 		7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */; };
@@ -44,7 +42,6 @@
 		7FB778F62EB7D493005FE797 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */; };
 		7FB778F72EB7D493005FE797 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F12B9B82BCC39E0006B7F68 /* DateFormatter.swift */; };
 		7FB778F82EB7D493005FE797 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB332B1A04500016E8A7 /* JournalListView.swift */; };
-		7FB778F92EB7D493005FE797 /* NetworkInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */; };
 		7FB778FA2EB7D493005FE797 /* DatabaseObjectsCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCA33C12B82A5AB0021221F /* DatabaseObjectsCloudKit.swift */; };
 		7FB778FB2EB7D493005FE797 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
@@ -106,7 +103,6 @@
 		7F69EB332B1A04500016E8A7 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
 		7F69EB3D2B1A234E0016E8A7 /* DatabaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseInteractor.swift; sourceTree = "<group>"; };
 		7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractor.swift; sourceTree = "<group>"; };
-		7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInteractorImpl.swift; sourceTree = "<group>"; };
 		7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleFMNetworkInteractor.swift; sourceTree = "<group>"; };
 		7FA205E72B9DD31E00DCCBF5 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		7FA205E92B9DFDEF00DCCBF5 /* SidebarSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSectionModel.swift; sourceTree = "<group>"; };
@@ -200,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				7F6EAE822B2A9C9000E97084 /* NetworkInteractor.swift */,
-				7F6EAE842B2A9CD600E97084 /* NetworkInteractorImpl.swift */,
 				7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */,
 				7F94C0612EBA353F0089E4DF /* AppleFMNetworkInteractor.swift */,
 			);
@@ -412,7 +407,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F2C2F1B2B975BD100F9D020 /* NetworkInteractorImpl.swift in Sources */,
 				7F2C2F1C2B975BDD00F9D020 /* NetworkInteractor.swift in Sources */,
 				7F2C2F122B9755AE00F9D020 /* JournalAppTests.swift in Sources */,
 				7F94C0642EBA353F0089E4DF /* AppleFMNetworkInteractor.swift in Sources */,
@@ -437,7 +431,6 @@
 				7FB778F62EB7D493005FE797 /* MainTabView.swift in Sources */,
 				7FB778F72EB7D493005FE797 /* DateFormatter.swift in Sources */,
 				7FB778F82EB7D493005FE797 /* JournalListView.swift in Sources */,
-				7FB778F92EB7D493005FE797 /* NetworkInteractorImpl.swift in Sources */,
 				7FB778FA2EB7D493005FE797 /* DatabaseObjectsCloudKit.swift in Sources */,
 				7FB778FB2EB7D493005FE797 /* String+cleanedUp.swift in Sources */,
 				7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */,
@@ -469,7 +462,6 @@
 				7FA205E82B9DD31E00DCCBF5 /* MainTabView.swift in Sources */,
 				7F12B9B92BCC39E0006B7F68 /* DateFormatter.swift in Sources */,
 				7F69EB342B1A04500016E8A7 /* JournalListView.swift in Sources */,
-				7F6EAE852B2A9CD600E97084 /* NetworkInteractorImpl.swift in Sources */,
 				7FCA33C22B82A5AB0021221F /* DatabaseObjectsCloudKit.swift in Sources */,
 				7F69EB272B1966BA0016E8A7 /* String+cleanedUp.swift in Sources */,
 				7FDF1A542B966D0E00B0D991 /* DatabaseInteractorMock.swift in Sources */,

@@ -15,7 +15,7 @@ enum DatabaseInteractorError: Error {
 
 @ModelActor
 actor DatabaseInteractor: ObservableObject {
-    let networkInteractor: any NetworkInteractor = AppleFMNetworkInteractor.shared
+    let aiAnalyzer: any NetworkInteractor = AppleFMNetworkInteractor.shared
         
     func loadUserProfile() async -> String {
         do {
@@ -71,6 +71,17 @@ actor DatabaseInteractor: ObservableObject {
         let profile = await self.loadUserProfile()
         let body = entry.body ?? ""
 
+        // Ensure the passed entry is managed by this actor's context
+        let pid = entry.persistentModelID
+        let entryDescriptor = FetchDescriptor<JournalEntrySwiftData>(
+            predicate: #Predicate { $0.persistentModelID == pid }
+        )
+        // If not found in this context, insert it so mutations are tracked
+        if (try? modelContext.fetch(entryDescriptor).first) == nil {
+            modelContext.insert(entry)
+            do { try modelContext.save() } catch { throw error }
+        }
+
         // MARK: - Analyze entry and produce a tweaked instruction for the user
         let analysisInstruction = """
         You are Lumi, a warm, friendly therapist and life coach inside an iOS journaling app. Read the user's journal entry in the context of their profile and produce:
@@ -87,12 +98,25 @@ actor DatabaseInteractor: ObservableObject {
         \(body)
         """
 
-        async let analysisResult = await networkInteractor.getAIoutput(instruction: analysisInstruction, modelIdentifier: "foundation-transformer")
+        async let analysisResult = await aiAnalyzer.getAIoutput(instruction: analysisInstruction)
         switch await analysisResult {
         case .success(let output):
             // Store the combined reflection + instruction so UI can show both
             entry.responseToBodyByAI = output
-            do { try modelContext.save() } catch { throw error }
+			
+			let pid = entry.persistentModelID
+			let descriptor = FetchDescriptor<JournalEntrySwiftData>(
+				predicate: #Predicate { $0.persistentModelID == pid }
+			)
+			if var managedEntry = try modelContext.fetch(descriptor).first {
+				managedEntry.responseToBodyByAI = output
+			}
+			
+			do {
+				try modelContext.save()
+			} catch {
+				throw error
+			}
         case .failure(let error):
             throw error
         }
@@ -105,10 +129,19 @@ actor DatabaseInteractor: ObservableObject {
         \(body)
         """
 
-        async let titleResult = await networkInteractor.getAIoutput(instruction: titleInstruction, modelIdentifier: "foundation-transformer")
+        async let titleResult = await aiAnalyzer.getAIoutput(instruction: titleInstruction)
         switch await titleResult {
         case .success(let output):
-            entry.name = output
+            let pid = entry.persistentModelID
+            let descriptor = FetchDescriptor<JournalEntrySwiftData>(
+                predicate: #Predicate { $0.persistentModelID == pid }
+            )
+            if var managedEntry = try modelContext.fetch(descriptor).first {
+                managedEntry.name = output
+            } else {
+                // Fallback: if not found, mutate the passed entry (already inserted above)
+                entry.name = output
+            }
             do { try modelContext.save() } catch { throw error }
         case .failure(let error):
             throw error
@@ -135,7 +168,7 @@ actor DatabaseInteractor: ObservableObject {
             """
         }
 
-        async let updatedProfileResult = await networkInteractor.getAIoutput(instruction: profileInstruction, modelIdentifier: "foundation-transformer")
+        async let updatedProfileResult = await aiAnalyzer.getAIoutput(instruction: profileInstruction)
         switch await updatedProfileResult {
         case .success(let output):
             await self.updateProfile(updatedProfile: output)
@@ -151,7 +184,7 @@ actor DatabaseInteractor: ObservableObject {
         \(await self.loadUserProfile())
         """
 
-        async let newTextIdeaResult = await networkInteractor.getAIoutput(instruction: newTextIdeaInstruction, modelIdentifier: "foundation-transformer")
+        async let newTextIdeaResult = await aiAnalyzer.getAIoutput(instruction: newTextIdeaInstruction)
         switch await newTextIdeaResult {
         case .success(let output):
             let newTextIdea = TextIdeaSwiftData(body: output)
