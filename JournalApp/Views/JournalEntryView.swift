@@ -267,16 +267,12 @@ struct JournalEntryView: View {
 	/// Create and insert a new entry with current journalBody.
 	/// Returns the created entry.
 	func saveNewEntry() -> JournalEntrySwiftData {
-		let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: journalBody)
-		context.insert(newEntrySwiftData)
-		try? context.save()
-		return newEntrySwiftData
+		return viewModel.createEntry(withBody: journalBody)
 	}
 	
 	/// Persist any changes to an existing entry if needed.
 	func saveExistingEntry(_ entry: JournalEntrySwiftData) {
-		context.insert(entry)
-		try? context.save()
+		viewModel.persist(entry)
 	}
 	
 	/// Original coordinator kept for button action; now delegates to the split functions.
@@ -347,3 +343,4 @@ struct JournalEntryView: View {
 //#Preview {
 //    JournalEntryView()
 //}
+

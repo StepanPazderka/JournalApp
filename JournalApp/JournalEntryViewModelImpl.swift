@@ -45,6 +45,19 @@ final class JournalEntryViewModelImpl: JournalViewModel {
 		}
     }
     
+    // MARK: - Persistence helpers moved from View
+    func createEntry(withBody body: String) -> JournalEntrySwiftData {
+        let newEntrySwiftData = JournalEntrySwiftData(date: Date(), name: "", body: body)
+        context.insert(newEntrySwiftData)
+        try? context.save()
+        return newEntrySwiftData
+    }
+
+    func persist(_ entry: JournalEntrySwiftData) {
+        context.insert(entry)
+        try? context.save()
+    }
+    
     func setup(context: ModelContext) {
         self.context = context
         self.databaseInteractor = DatabaseInteractor(modelContainer: context.container)

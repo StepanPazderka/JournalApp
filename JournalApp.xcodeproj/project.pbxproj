@@ -18,7 +18,6 @@
 		7F2C2F1D2B975BE900F9D020 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F44EDE72B1FC60600A50C58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44EDE62B1FC60600A50C58 /* ProfileView.swift */; };
 		7F4D08492B87894200F4F47F /* String+truncated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D08482B87894200F4F47F /* String+truncated.swift */; };
-		7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */; };
 		7F69EB272B1966BA0016E8A7 /* String+cleanedUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */; };
 		7F69EB2A2B19764F0016E8A7 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7F69EB292B19764F0016E8A7 /* OpenAI */; };
 		7F69EB2C2B1A00E40016E8A7 /* JournalEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */; };
@@ -50,7 +49,6 @@
 		7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A532B966D0E00B0D991 /* DatabaseInteractorMock.swift */; };
 		7FB778FD2EB7D493005FE797 /* View+hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD19FC92B1DB51800D97901 /* View+hidden.swift */; };
 		7FB778FE2EB7D493005FE797 /* NetworkInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDF1A512B9639F900B0D991 /* NetworkInteractorMock.swift */; };
-		7FB778FF2EB7D493005FE797 /* ModelContext+existingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */; };
 		7FB779002EB7D493005FE797 /* String+transformToSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */; };
 		7FB779012EB7D493005FE797 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD438CB2BBB8FD500DB31F0 /* ViewType.swift */; };
 		7FB779022EB7D493005FE797 /* JournalEntryViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */; };
@@ -98,7 +96,6 @@
 		7F2C2F112B9755AE00F9D020 /* JournalAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppTests.swift; sourceTree = "<group>"; };
 		7F44EDE62B1FC60600A50C58 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7F4D08482B87894200F4F47F /* String+truncated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+truncated.swift"; sourceTree = "<group>"; };
-		7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+existingModel.swift"; sourceTree = "<group>"; };
 		7F69EB262B1966BA0016E8A7 /* String+cleanedUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cleanedUp.swift"; sourceTree = "<group>"; };
 		7F69EB2B2B1A00E40016E8A7 /* JournalEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModel.swift; sourceTree = "<group>"; };
 		7F69EB2D2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewModelImpl.swift; sourceTree = "<group>"; };
@@ -172,7 +169,6 @@
 				7FD19FC92B1DB51800D97901 /* View+hidden.swift */,
 				7FC0E7952B267903002EDB73 /* String+transformToSentence.swift */,
 				7F4D08482B87894200F4F47F /* String+truncated.swift */,
-				7F4D084A2B87B19F00F4F47F /* ModelContext+existingModel.swift */,
 				7F12B9B82BCC39E0006B7F68 /* DateFormatter.swift */,
 				7F1ADD492BE58EE300E7CA42 /* ReadFirstLineOfTextfile.swift */,
 			);
@@ -443,7 +439,6 @@
 				7FB778FC2EB7D493005FE797 /* DatabaseInteractorMock.swift in Sources */,
 				7FB778FD2EB7D493005FE797 /* View+hidden.swift in Sources */,
 				7FB778FE2EB7D493005FE797 /* NetworkInteractorMock.swift in Sources */,
-				7FB778FF2EB7D493005FE797 /* ModelContext+existingModel.swift in Sources */,
 				7FB779002EB7D493005FE797 /* String+transformToSentence.swift in Sources */,
 				7FB779012EB7D493005FE797 /* ViewType.swift in Sources */,
 				7FB779022EB7D493005FE797 /* JournalEntryViewModelImpl.swift in Sources */,
@@ -475,7 +470,6 @@
 				7FDF1A542B966D0E00B0D991 /* DatabaseInteractorMock.swift in Sources */,
 				7FD19FCA2B1DB51800D97901 /* View+hidden.swift in Sources */,
 				7FDF1A522B9639F900B0D991 /* NetworkInteractorMock.swift in Sources */,
-				7F4D084B2B87B19F00F4F47F /* ModelContext+existingModel.swift in Sources */,
 				7FC0E7962B267903002EDB73 /* String+transformToSentence.swift in Sources */,
 				7FD438CC2BBB8FD500DB31F0 /* ViewType.swift in Sources */,
 				7F69EB2E2B1A01500016E8A7 /* JournalEntryViewModelImpl.swift in Sources */,
